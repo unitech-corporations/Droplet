@@ -1,0 +1,104 @@
+   <html>
+       
+    <title>Droplet</title>   
+       
+    <head>
+        <link rel="icon" href = "icon.ico">
+        
+        <style>
+        
+        body  {
+            background-image: url("loginbgrnd3.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            
+        }
+            
+        </style>
+    </head>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
+    <script>
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                alert("Not logged in.");
+                return;
+            } else {
+                userId = user.uid;
+                name = user.displayName;
+                imageUrl = user.photoURL;
+                email = user.email;
+                    
+                // write user data to users
+                //writeUserData(userId, name, email, imageUrl);
+                // moved to tweet function
+                
+                // write data to document
+                mydiv = document.getElementById("mydata");
+                document.getElementById("namediv").innerHTML = name;
+                
+                myemaildiv = document.getElementById("myemail");
+                document.getElementById("myemail").innerHTML = email;
+                
+                myphotodiv = document.getElementById("myphoto");
+                myphotodiv.innerHTML = "<img src='" + imageUrl + "' style='position:absolute; left: 1300px; top: 72px; width: 75px; height: 75px;'/>";
+
+                firebase.database().ref('/tweets').once('value').then(function(snapshot) {
+                    var data = (snapshot.val());
+                    if (data == null) {
+                      console.log("No data found at /tweets/" + userId);  
+                    } else {
+                        
+                      firebase.database().ref('/users').once('value').then(function(snapshot) { 
+                        var userdata = (snapshot.val());
+                        if (userdata != null) {
+                           dataarray = [data,userdata]
+                           console.log(dataarray)
+                           updatetweets(dataarray); 
+                        }
+                      });
+                      //console.log(data)
+                      //updatetweets(data);
+                    }
+                });
+            } // end user null check
+        }); // end check auth state
+        
+        function login() {
+            console.log("Logging in");
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider).then(function(result) { 
+                window.location.replace("home.html");
+            });
+            window.location.replace("home.html");
+        }
+    
+    </script>
+
+    <body>
+
+        <form action="home.html">
+            <input style="position: absolute; top: 520; left: 560; background: #1E90FF; color: white;  width: 325px; height: 125px; font-family: Archivo Narrow; font-size: 75; font-weight: SemiBold; cursor: pointer;" type="submit" value="Log In" />
+        </form>
+        
+        <p style="position: absolute; top: 150; left: 520; color: #fff; font-family: Archivo Narrow; font-size: 150; font-weight: SemiBold; cursor: pointer;">Droplet</p> 
+    
+        <div id="mytweets"></div>
+        <div id="mydata"></div>
+        <div id="myphoto"></div>
+        
+    </body>
+
+     
+    <div id="tweets"></div>
+    <!-- Div tag -->
+    
+    <body style="background-color: #000000">
+    
+    </body>
+ 
+</html>

@@ -1,0 +1,18 @@
+{
+  "tweets": {
+    "m1SZOkQ93xR8IoOcxtWnaF0nibq0": {
+      "-LWY3zmdKbRcdefIm8_x": {
+        "tweet": "Hello ?",
+        "timestamp": "1234567891",
+        "img": ""
+      }
+    }
+    },
+    "users": {
+      "m1SZOkQ93xR8IoOcxtWnaF0nibq0": {
+        "email": "dcrawford@ucc.on.ca",
+        "profile_picture": "https://lh3.googleusercontent.com/-rI-udG5swZA/AAAAAAAAAAI/AAAAAAAAI2w/V7AqUC9xr24/photo.jpg",
+        "username": "David Crawford"
+      }
+    }
+}
