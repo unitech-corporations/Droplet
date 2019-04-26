@@ -1,350 +1,27 @@
    <html>
        
     <title>Droplet</title>   
-
-       <head>
+       
+    <head>
         <link rel="icon" href = "icon.ico">
         
         <style>
+        
+        body  {
+            background-image: url("loginbgrnd3.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
             
-            tr:hover {background-color: #B0E0E6;}
-            th, td {border-bottom: 1px solid #ddd;}
-            
-            * {box-sizing: border-box;}
-
-            body {
-              margin: 0;
-              font-family: Helvetica, Helvetica, Helvetica;
-              font-weight: lighter;
-            }
-            
-            /*Loading spinner*/
-            /*html {
-              --spinner: #1EAAF0;
-              --center: translate(-50%, -50%);
-            }
-            .center {
-               position: absolute;
-               width: 30px;
-               height: 30px;
-               background: var(--spinner);
-               border-radius: 50%;
-               top: 50%;
-               left: 50%;
-               transform: var(--center); 
-            }
-            .outer-spin, .inner-spin {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-            }
-            .outer-spin {
-              animation: spin 4s linear infinite;
-            }
-            .outer-arc, .inner-arc {
-              position: absolute;
-              border-radius: 50%;
-              border: 4px solid;
-            }
-            .outer-arc {
-              width: 100px;
-              height: 100px;
-            }
-            .outer-arc_start-a {
-              border-color: transparent transparent transparent var(--spinner);
-              /*NOTE: the order here very much matters!  */
-            /*  transform: var(--center) rotate(65deg); 
-            }
-            .outer-arc_end-a {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg);
-            }
-            .outer-arc_start-b {
-              border-color: transparent transparent transparent var(--spinner); 
-              transform: var(--center) rotate(65deg) scale(-1, -1);
-            }
-            .outer-arc_end-b {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg) scale(-1, -1);
-            }
-
-            .outer-moon-a {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 15px;
-               height: 15px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(52px, 0); 
-            }
-            .outer-moon-b {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 15px;
-               height: 15px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(-52px, 0); 
-            }
-            .inner-spin {
-              animation: spin 3s linear infinite;
-            }
-            .inner-arc {
-              width: 62px;
-              height: 62px;
-            }
-            .inner-arc_start-a {
-              border-color: transparent transparent transparent var(--spinner);
-            /*NOTE: the order here very much matters!  */
-            /*  transform: var(--center) rotate(65deg); 
-            }
-            .inner-arc_end-a {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg);
-            }
-            .inner-arc_start-b {
-              border-color: transparent transparent transparent var(--spinner); 
-              transform: var(--center) rotate(65deg) scale(-1, -1);
-            }
-            .inner-arc_end-b {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg) scale(-1, -1);
-            }
-            .inner-moon-a {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 12px;
-               height: 12px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(33px, 0); 
-            }
-            .inner-moon-b {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 12px;
-               height: 12px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(-33px, 0); 
-            }
-            @keyframes spin { 100% {transform: rotate(360deg); } }*/
-
-            .topnav {
-              overflow: hidden;
-              background-color: #e9e9e9;
-            }
-
-            .topnav a {
-              float: left;
-              display: block;
-              color: black;
-              text-align: center;
-              padding: 14px 16px;
-              text-decoration: none;
-              font-size: 17px;
-            }
-
-            .topnav a:hover, .dropdown:hover {
-              background-color: #0000CD;
-              color: white;
-            }
-            
-            .dropbtn {
-              background-color: transparent;
-              color: black;
-              text-align: center;
-              padding: 14px 16px;
-              text-decoration: none;
-              font-size: 17px;
-              font-family: Helvetica;
-            }
-
-            .topnav a.active {
-              background-color: #0000CD;
-              color: white;
-            }
-
-            .topnav .search-container {
-              float: right;
-            }
-
-            .topnav input[type=text] {
-              padding: 6px;
-              margin-top: 8px;
-              font-size: 17px;
-              border: none;
-            }
-
-            .topnav .search-container button {
-              float: right;
-              padding: 6px 10px;
-              margin-top: 8px;
-              margin-right: 16px;
-              background: #ddd;
-              font-family: Helvetica;
-              font-size: 17px;
-              font-weight: lighter;
-              border: none;
-              cursor: pointer;
-            }
-
-            .topnav .search-container button:hover {
-              background: #ccc;
-            }
-            
-            .dropdown {
-              float: left;
-              overflow: hidden;
-            }
-            
-            .dropdown .dropbtn {
-              font-size: 16px;  
-              border: none;
-              outline: none;
-              padding: 14px 16px;
-              background-color: inherit;
-              font-family: Helvetica;
-              margin: 0;
-            }
-            
-            .dropbtn2 {
-              font-size: 16px;  
-              border: none;
-              outline: none;
-              padding: 14px 16px;
-              font-family: Helvetica;
-              margin: 0;
-            }
-            
-            .dropdown-content {
-              display: none;
-              position: absolute;
-              background-color: #f9f9f9;
-              min-width: 160px;
-              box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-              z-index: 1;
-            }
-            
-            .dropdown-content a {
-              float: none;
-              color: black;
-              padding: 12px 16px;
-              text-decoration: none;
-              display: block;
-              text-align: left;
-            }
-            
-            .dropdown-content a:hover {
-              background-color: #ddd;
-            }
-
-            .dropdown:hover .dropdown-content {
-              display: block;
-            }
-
-            @media screen and (max-width: 600px) {
-              .topnav .search-container {
-                float: none;
-              }
-              .topnav a, .topnav input[type=text], .topnav .search-container button {
-                float: none;
-                display: block;
-                text-align: left;
-                width: 100%;
-                margin: 0;
-                padding: 14px;
-              }
-              .topnav input[type=text] {
-                border: 1px solid #ccc;  
-              }
-            }
-            
-            .profcard {
-              float: right;
-              box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-              /*max-width: 300px;*/
-              margin: auto;
-              text-align: center;
-              font-family: Helvetica;
-              padding-left: 30px;
-              padding-right: 30px;
-              padding-top: 10px;
-              padding-bottom: 10px;
-              line-height: 0.5;
-            }
-            
-            div.textbox {
-                display: flex;
-                justify-content: center;
-            }
-            
-            /* The search field */
-            #myInput {
-              border-box: box-sizing;
-              background-image: url('searchicon.png');
-              background-position: 14px 12px;
-              background-repeat: no-repeat;
-              font-size: 16px;
-              padding: 14px 20px 12px 45px;
-              border: none;
-              border-bottom: 1px solid #ddd;
-            }
-
-            /* The search field when it gets focus/clicked on */
-            #myInput:focus {outline: 3px solid #ddd;}
-            
-            .show {display:block;}
-
-            
-            /*.textb {
-                background-color: #0000CD;
-            }*/
+        }
             
         </style>
     </head>
 
-    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
     <script>
-      // Initialize Firebase
-    var loadDate = "";  
-        
-        //Search filter
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        function filterFunction() {
-          var input, filter, ul, li, a, i;
-          input = document.getElementById("myInput");
-          filter = input.value.toUpperCase();
-          div = document.getElementById("myDropdown");
-          a = div.getElementsByTagName("a");
-          for (i = 0; i < a.length; i++) {
-            txtValue = a[i].textContent || a[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              a[i].style.display = "";
-            } else {
-              a[i].style.display = "none";
-            }
-          }
-        }
-        
-    var config = {
-        apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
-        authDomain: "droplet-34330.firebaseapp.com",
-        databaseURL: "https://droplet-34330.firebaseio.com",
-        projectId: "droplet-34330",
-        storageBucket: "droplet-34330.appspot.com",
-        messagingSenderId: "822727269402"
-      };
-      firebase.initializeApp(config);
-                
         // Check to see if you are logged in
         firebase.auth().onAuthStateChanged(function(user) {
             if (user == null) {
@@ -355,8 +32,6 @@
                 name = user.displayName;
                 imageUrl = user.photoURL;
                 email = user.email;
-                
-                loadDate = new Date().toString();
                     
                 // write user data to users
                 //writeUserData(userId, name, email, imageUrl);
@@ -393,243 +68,37 @@
             } // end user null check
         }); // end check auth state
         
-        function encodeImageFileAsURL() {
-
-            var filesSelected = document.getElementById("inputFileToLoad").files;
-            if (filesSelected.length > 0) {
-                var fileToLoad = filesSelected[0];
-                var fileReader = new FileReader();
-                fileReader.onload = function(fileLoadedEvent) {
-                    var srcData = fileLoadedEvent.target.result; // <--- data: base64
-                    //var newImage = document.createElement('img');
-                    //newImage.src = srcData;
-                    //document.getElementById("imgTest").innerHTML = newImage.outerHTML;
-                    document.getElementById("imgTest").innerHTML = srcData;
-                    //console.log("Converted Base64 version is: " + document.getElementById("imgTest").innerHTML);
-                    console.log(srcData);
-                }
-                fileReader.readAsDataURL(fileToLoad);
-            }
-        } // end function
-        
-        // write user data
-        function writeUserData(userId, name, email, imageUrl) {
-            firebase.database().ref('users/' + userId).once('value',    function(snapshot) {
-                 if (!snapshot.exists()) {
-                    firebase.database().ref('users/' + userId).set({
-                        username: name,
-                        email: email,
-                        profile_picture : imageUrl
-                    }); 
-                 }                                      
-            });
-        }
-        
-        
-        
-        // write tweets to firebase
-        function tweet() {
-            
-            loadDate = new Date().toString();
-            var twitdoc = document.getElementById("twit");
-            var twitimg = document.getElementById("imgTest");
-            var nameValue = twitdoc.value;
-            var imgValue = twitimg.innerHTML;
-            var js_time = Date.now();
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time, img: imgValue});
-            twitdoc.value = "";
-            writeUserData(userId, name, email, imageUrl);
-            console.log("tweet written")
-            
-            firebase.database().ref('/tweets').once('value').then(function(snapshot) {
-                    var data = (snapshot.val());
-                    if (data == null) {
-                      console.log("No data found at /tweets/" + userId);  
-                    } else { 
-                        firebase.database().ref('/users').once('value').then(function(snapshot) { 
-                        var userdata = (snapshot.val());
-                        if (userdata != null) {
-                           dataarray = [data,userdata]
-                           console.log(dataarray)
-                           updatetweets(dataarray); 
-                        }
-                      });
-                    }
-                });
-            
-            
-            
-            // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
-            
-        }
-        
-        var timeSince = function(date) {
-          switch (typeof time) {
-            case 'number':
-              break;
-            case 'string':
-              time = +new Date(time);
-              break;
-            case 'object':
-              if (time.constructor === Date) time = time.getTime();
-              break;
-            default:
-              time = +new Date();
-          }
-          var time_formats = [
-            [60, 'seconds', 1], // 60
-            [120, '1 minute ago', '1 minute from now'], // 60*2
-            [3600, 'minutes', 60], // 60*60, 60
-            [7200, '1 hour ago', '1 hour from now'], // 60*60*2
-            [86400, 'hours', 3600], // 60*60*24, 60*60
-            [172800, 'Yesterday', 'Tomorrow'], // 60*60*24*2
-            [604800, 'days', 86400], // 60*60*24*7, 60*60*24
-            [1209600, 'Last week', 'Next week'], // 60*60*24*7*4*2
-            [2419200, 'weeks', 604800], // 60*60*24*7*4, 60*60*24*7
-            [4838400, 'Last month', 'Next month'], // 60*60*24*7*4*2
-            [29030400, 'months', 2419200], // 60*60*24*7*4*12, 60*60*24*7*4
-            [58060800, 'Last year', 'Next year'], // 60*60*24*7*4*12*2
-            [2903040000, 'years', 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
-            [5806080000, 'Last century', 'Next century'], // 60*60*24*7*4*12*100*2
-            [58060800000, 'centuries', 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
-          ];
-          var seconds = (+new Date() - time) / 1000,
-            token = 'ago',
-            list_choice = 1;
-
-          if (seconds == 0) {
-            return 'Just now'
-          }
-          if (seconds < 0) {
-            seconds = Math.abs(seconds);
-            token = 'from now';
-            list_choice = 2;
-          }
-          var i = 0,
-            format;
-          while (format = time_formats[i++])
-            if (seconds < format[0]) {
-              if (typeof format[2] == 'string')
-                return format[list_choice];
-              else
-                return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
-            }
-          return time;
-        };
-        
-        
-        
         function login() {
             console.log("Logging in");
             var provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithRedirect(provider).then(function(result) { 
-                window.location.replace("home.html");
+                window.location.replace("index.html");
             });
+            window.location.replace("index.html");
         }
-        
-        function logout() {
-            console.log("Logging out");
-            firebase.auth().signOut().then(function() {
-            });
-        }
-        
-        function changename() {
-            console.log("Changing username");
-            //name = username;
-        }
-        
+    
     </script>
 
     <body>
+
+        <form action="index.html">
+            <input style="position: absolute; top: 520; left: 560; background: #1E90FF; color: white;  width: 325px; height: 125px; font-family: Archivo Narrow; font-size: 75; font-weight: SemiBold; cursor: pointer;" type="submit" value="Log In" />
+        </form>
         
-        <!--Loading spinner-->
-        <div class="center"></div>
-
-        <div class="inner-spin">
-
-          <div class="inner-arc inner-arc_start-a"></div>
-          <div class="inner-arc inner-arc_end-a"></div>
-
-          <div class="inner-arc inner-arc_start-b"></div>
-          <div class="inner-arc inner-arc_end-b"></div>
-
-          <div class="inner-moon-a"></div>
-         <div class="inner-moon-b"></div>
-
-        </div>
-
-        <div class="outer-spin">
-
-          <div class="outer-arc outer-arc_start-a"></div>
-          <div class="outer-arc outer-arc_end-a"></div>
-
-          <div class="outer-arc outer-arc_start-b"></div>
-          <div class="outer-arc outer-arc_end-b"></div>
-
-          <div class="outer-moon-a"></div>
-         <div class="outer-moon-b"></div>
-
-        </div>
-        
-        <div class="topnav">
-          <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
-          <a href="index.html" style="float:left"class="dropbtn"><img src="logo2.png" style="width: 15; height: 20px;"></a> 
-          <a href="soccer.html">Soccer</a>
-          <a href="basketball.html">Basketball</a>
-          <a href="nanotech.html">Nanotech</a>
-          <a href="ar.html">Augmented Reality</a>
-        
-        <div class="dropdown" style="font-family: helvetica; ">
-          <button onclick="myFunction()" class="dropbtn">Find Favorites</button>
-          <div id="myDropdown" class="dropdown-content">
-            <input type="text" placeholder="Search Droplet..." id="myInput" onkeyup="filterFunction()">
-            <a href="soccer.html">Soccer</a>
-            <a href="basketball.html">Basketball</a>
-            <a href="nanotech.html">Nanotech</a>
-            <a href="ar.html">Augmented Reality</a>
-          </div>
-        </div>
-        </div>
-        
-        <div class="profcard">
-          <img src="user.svg" alt="John" style="width:80; height:80;"> <h1 id="namediv"></h1>
-          <p><button onclick="changename()" style="width: 40px; height: 40px; cursor: pointer; background-color: #C0C0C0"><img src="pencil.png" style="width: 25; height: 25px;"></button></p>
-          <form onclick="changename()" method="get" id="nameform">
-            Username: <input type="text" name="username"><br>
-          </form>
-          <p style="color: #B0C4DE" id="myemail">guest1@gmail.com</p>
-          <p>Level: 15</p>
-          <p>Droplets: 810</p>
-          <p>Connections: 25</p>
-          <p><button style="background: #0000CD; color: white;  width: 150px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Settings</button></p>
-          <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Helvetica; font-size: 15px;">Log In</button></p>
-          <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Helvetica; font-size: 15px;">Log Out</button></p>
-        </div>
-        
-        <!--<button onclick="logout()">Log Oooout</button>-->
-      
-
+        <p style="position: absolute; top: 150; left: 520; color: #fff; font-family: Archivo Narrow; font-size: 150; font-weight: SemiBold; cursor: pointer;">Droplet</p> 
     
-    <div id="mytweets"></div>
-    <div id="mydata"></div>
-    <div id="myphoto"></div>
+        <div id="mytweets"></div>
+        <div id="mydata"></div>
+        <div id="myphoto"></div>
         
     </body>
+
+     
+    <div id="tweets"></div>
+    <!-- Div tag -->
     
-    <body>
+    <body style="background-color: #000000">
     
-    <!--<style>
-        #row:hover {
-            background-color: lightblue;
-            color: white;
-        }
-        
-        #row {
-            background-color: white;
-            color: red;
-        }
-    </style>-->
-        
     </body>
  
 </html>

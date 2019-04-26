@@ -149,9 +149,19 @@
               font-size: 17px;
             }
 
-            .topnav a:hover, .dropdown:hover .dropbtn {
+            .topnav a:hover, .dropdown:hover {
               background-color: #0000CD;
               color: white;
+            }
+            
+            .dropbtn {
+              background-color: transparent;
+              color: black;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+              font-size: 17px;
+              font-family: Helvetica;
             }
 
             .topnav a.active {
@@ -198,7 +208,16 @@
               outline: none;
               padding: 14px 16px;
               background-color: inherit;
-              font-family: inherit;
+              font-family: Helvetica;
+              margin: 0;
+            }
+            
+            .dropbtn2 {
+              font-size: 16px;  
+              border: none;
+              outline: none;
+              padding: 14px 16px;
+              font-family: Helvetica;
               margin: 0;
             }
             
@@ -264,9 +283,27 @@
                 justify-content: center;
             }
             
-            .textb {
-                background-color: #0000CD;
+            /* The search field */
+            #myInput {
+              border-box: box-sizing;
+              background-image: url('searchicon.png');
+              background-position: 14px 12px;
+              background-repeat: no-repeat;
+              font-size: 16px;
+              padding: 14px 20px 12px 45px;
+              border: none;
+              border-bottom: 1px solid #ddd;
             }
+
+            /* The search field when it gets focus/clicked on */
+            #myInput:focus {outline: 3px solid #ddd;}
+            
+            .show {display:block;}
+
+            
+            /*.textb {
+                background-color: #0000CD;
+            }*/
             
         </style>
     </head>
@@ -275,7 +312,30 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
       // Initialize Firebase
-      var config = {
+    var loadDate = "";  
+        
+        //Search filter
+        function myFunction() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        function filterFunction() {
+          var input, filter, ul, li, a, i;
+          input = document.getElementById("myInput");
+          filter = input.value.toUpperCase();
+          div = document.getElementById("myDropdown");
+          a = div.getElementsByTagName("a");
+          for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              a[i].style.display = "";
+            } else {
+              a[i].style.display = "none";
+            }
+          }
+        }
+        
+    var config = {
         apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
         authDomain: "droplet-34330.firebaseapp.com",
         databaseURL: "https://droplet-34330.firebaseio.com",
@@ -295,6 +355,8 @@
                 name = user.displayName;
                 imageUrl = user.photoURL;
                 email = user.email;
+                
+                loadDate = new Date().toString();
                     
                 // write user data to users
                 //writeUserData(userId, name, email, imageUrl);
@@ -363,45 +425,12 @@
             });
         }
         
-        function updatetweets(data) {
-            //var mylist = "<ul>";
-            var mytab = "<table align='center'>";
-            users = data[1]; // put on top, because changed data - not good coding change later
-            data = data[0];
-            
-            for (var u in data) {
-                for (var t in data[u]) {
-                    mytab = mytab + "<tr>";
-                    //var date = timeSince(new Date(Date.now()));
-                    var date = timeSince(new Date(data[u][t].time));
-                    var time = date.toString();
-                    //If there is an image posted
-                    if (data[u][t].img != "") {
-                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
-                        mytab = mytab + "<td>" + users[u].username + "</td>";
-                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
-                        mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
-                    } else {
-                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
-                        mytab = mytab + "<td>" + users[u].username + "</td>";
-                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
-                        mytab = mytab + "<td>" + time + "</td>";
-                        
-                        
-                    } 
-                    mytab = mytab + "</tr>";
-                }   
-            }
-            //mylist = mylist + "</ul>";
-            mytab = mytab + "</table>"
-            var mytdiv = document.getElementById("mytweets");
-            //mytdiv.innerHTML = mylist;
-            mytdiv.innerHTML = mytab;
-        }
+        
         
         // write tweets to firebase
         function tweet() {
             
+            loadDate = new Date().toString();
             var twitdoc = document.getElementById("twit");
             var twitimg = document.getElementById("imgTest");
             var nameValue = twitdoc.value;
@@ -508,7 +537,7 @@
             console.log("Changing username");
             //name = username;
         }
-    
+        
     </script>
 
     <body>
@@ -544,24 +573,22 @@
         
         <div class="topnav">
           <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
-          <div class="dropdown">
-            <button class="dropbtn"><img src="logo2.png" style="width: 15; height: 20px;"></button>
-            <div class="dropdown-content">
-              <a href="#">Posts</a>
-              <a href="#">Connections</a>
-            </div>
-          </div> 
-          <a href="#soccer">Soccer</a>
-          <a href="#basketball">Basketball</a>
-          <a href="#nanotech">Nanotech</a>
-          <a href="#AR">Augmented Reality</a>
-          <a href="#favs">Other Favorites</a>
-          <div class="search-container">
-            <form action="/action_page.php">
-              <input type="text" placeholder="Search..." name="search">
-              <button type="submit"></button>
-            </form>
+          <a href="index.html" style="float:left"class="dropbtn"><img src="logo2.png" style="width: 15; height: 20px;"></a> 
+          <a href="soccer.html">Soccer</a>
+          <a href="basketball.html">Basketball</a>
+          <a href="nanotech.html">Nanotech</a>
+          <a href="ar.html">Augmented Reality</a>
+        
+        <div class="dropdown" style="font-family: helvetica; ">
+          <button onclick="myFunction()" class="dropbtn">Find Favorites</button>
+          <div id="myDropdown" class="dropdown-content">
+            <input type="text" placeholder="Search Droplet..." id="myInput" onkeyup="filterFunction()">
+            <a href="soccer.html">Soccer</a>
+            <a href="basketball.html">Basketball</a>
+            <a href="nanotech.html">Nanotech</a>
+            <a href="ar.html">Augmented Reality</a>
           </div>
+        </div>
         </div>
         
         <div class="profcard">
@@ -572,7 +599,7 @@
           </form>
           <p style="color: #B0C4DE" id="myemail">guest1@gmail.com</p>
           <p>Level: 15</p>
-          <p>Points: 810</p>
+          <p>Droplets: 810</p>
           <p>Connections: 25</p>
           <p><button style="background: #0000CD; color: white;  width: 150px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Settings</button></p>
           <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Helvetica; font-size: 15px;">Log In</button></p>
@@ -580,21 +607,7 @@
         </div>
         
         <!--<button onclick="logout()">Log Oooout</button>-->
-        
-        <div class="textbox">
-        <form>
-            Send a Message!<br>
-            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4" style="font-family: Helvetica; font-size: 15px; font-weight: 100;"></textarea>
-        </form>
-        </div>
-        
-        <p align="center">
-        <button type="button" onclick="tweet()" style="align-content: center; font-family: Helvetica; background: #0000CD; color: white;  width: 75px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Send</button>
-        </p>
-        
-
-        <br><input class="textb" id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="position: absolute; left: 500px;"/>
-        <div id="imgTest" style="display:none;"></div>
+      
 
     
     <div id="mytweets"></div>
