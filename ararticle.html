@@ -314,36 +314,15 @@
       // Initialize Firebase
     var loadDate = "";  
         
-        //Search filter
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        function filterFunction() {
-          var input, filter, ul, li, a, i;
-          input = document.getElementById("myInput");
-          filter = input.value.toUpperCase();
-          div = document.getElementById("myDropdown");
-          a = div.getElementsByTagName("a");
-          for (i = 0; i < a.length; i++) {
-            txtValue = a[i].textContent || a[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              a[i].style.display = "";
-            } else {
-              a[i].style.display = "none";
-            }
-          }
-        }
-        
     var config = {
-        apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
-        authDomain: "droplet-34330.firebaseapp.com",
-        databaseURL: "https://droplet-34330.firebaseio.com",
-        projectId: "droplet-34330",
-        storageBucket: "droplet-34330.appspot.com",
-        messagingSenderId: "822727269402"
-      };
-      firebase.initializeApp(config);
+    apiKey: "AIzaSyDu1lxVAxOAX_6FnI6E7GR-EJJAAmR-RYU",
+    authDomain: "augmented-reality-5e9c8.firebaseapp.com",
+    databaseURL: "https://augmented-reality-5e9c8.firebaseio.com",
+    projectId: "augmented-reality-5e9c8",
+    storageBucket: "augmented-reality-5e9c8.appspot.com",
+    messagingSenderId: "821949643031"
+  };
+  firebase.initializeApp(config);
                 
         // Check to see if you are logged in
         firebase.auth().onAuthStateChanged(function(user) {
@@ -425,7 +404,69 @@
             });
         }
         
-        
+        function updatetweets(data) {
+            //var mylist = "<ul>";
+            var mytab = "<br><br><br><table style='position:absolute; left: 275px;'>";
+            users = data[1]; // put on top, because changed data - not good coding change later
+            data = data[0];
+            
+            for (var u in data) {
+                for (var t in data[u]) {
+                    mytab = mytab + "<tr>";
+                    //var date = timeSince(new Date(Date.now()));
+                    var date = new Date(data[u][t].time);
+                    var time = date.toString();
+                    if (time.substring(0,15) == loadDate.substring(0,15)) {
+                        if (time.substring(16,18) == loadDate.substring(16,18)) {
+                            var num1 = Number(loadDate.substring(19,21));
+                            var num2 = Number(time.substring(19,21));
+                            console.log(num1);
+                            var num3 = num1 - num2;
+                            time = num3.toString() + " minutes ago";
+                        } else {
+                            var num1 = Number(loadDate.substring(16,18));
+                            var num2 = Number(time.substring(16,18));
+                            var num3 = num1 - num2;
+                            if (num3 == 1) {
+                                var num1 = Number(loadDate.substring(19,21));
+                                var num2 = Number(time.substring(19,21));
+                                console.log(num1);
+                                var num3 = num1 - num2 + 60;
+                                if (num3 > 59) {
+                                    time = "1 hour ago"
+                                } else {
+                                    time = num3.toString() + " minutes ago";
+                                }
+                            } else {
+                                time = num3.toString() + " hours ago";
+                            }
+                        }
+                    } else {
+                        time = time.substring(4,15);
+                    }
+                    //If there is an image posted
+                    if (data[u][t].img != "") {
+                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td>" + users[u].username + "</td>";
+                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
+                    } else {
+                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td>" + users[u].username + "</td>";
+                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td>" + time + "</td>";
+                        
+                        
+                    } 
+                    mytab = mytab + "</tr>";
+                }   
+            }
+            //mylist = mylist + "</ul>";
+            mytab = mytab + "</table>"
+            var mytdiv = document.getElementById("mytweets");
+            //mytdiv.innerHTML = mylist;
+            mytdiv.innerHTML = mytab;
+        }
         
         // write tweets to firebase
         function tweet() {
@@ -537,7 +578,7 @@
             console.log("Changing username");
             //name = username;
         }
-        
+    
     </script>
 
     <body>
@@ -607,7 +648,41 @@
         </div>
         
         <!--<button onclick="logout()">Log Oooout</button>-->
-      
+        
+        <div>
+        <center>
+        <p style="font-family: helvetica; font-size: 50px; font-weight: bold">Barcelona vs Man Utd: Top 3 Player Ratings</p>
+        <img src="barca.jpg" style="width: 1050; height: 625">
+        <br><br>    
+        <p>LIONEL MESSI - 9</p> 
+
+        <p>Subdued in the first leg, sublime here. What a first goal. What a show. What a wonderful player.</p>
+
+        <p>LUIS SUAREZ - 7</p> 
+
+        <p>Cut a frustrated figure at times but still did more than enough to keep United busy.</p>
+            
+        <p>PHILIPPE COUTINHO - 7</p> 
+
+        <p>Exploded into life with the kind of stunning strike we are used to seeing from him in the Premier League.</p>
+        </center>
+        </div>
+        
+        <br><br><br>
+        <div class="textbox">
+        <form>
+            Send a Message!<br>
+            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4" style="font-family: Helvetica; font-size: 15px; font-weight: 100;"></textarea>
+        </form>
+        </div>
+        
+        <p align="center">
+        <button type="button" onclick="tweet()" style="align-content: center; font-family: Helvetica; background: #0000CD; color: white;  width: 75px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Send</button>
+        </p>
+        
+
+        <br><input class="textb" id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="position: absolute; left: 635px;"/>
+        <div id="imgTest" style="display:none;"></div>
 
     
     <div id="mytweets"></div>

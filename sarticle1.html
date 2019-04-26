@@ -17,122 +17,6 @@
               font-family: Helvetica, Helvetica, Helvetica;
               font-weight: lighter;
             }
-            
-            /*Loading spinner*/
-            /*html {
-              --spinner: #1EAAF0;
-              --center: translate(-50%, -50%);
-            }
-            .center {
-               position: absolute;
-               width: 30px;
-               height: 30px;
-               background: var(--spinner);
-               border-radius: 50%;
-               top: 50%;
-               left: 50%;
-               transform: var(--center); 
-            }
-            .outer-spin, .inner-spin {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-            }
-            .outer-spin {
-              animation: spin 4s linear infinite;
-            }
-            .outer-arc, .inner-arc {
-              position: absolute;
-              border-radius: 50%;
-              border: 4px solid;
-            }
-            .outer-arc {
-              width: 100px;
-              height: 100px;
-            }
-            .outer-arc_start-a {
-              border-color: transparent transparent transparent var(--spinner);
-              /*NOTE: the order here very much matters!  */
-            /*  transform: var(--center) rotate(65deg); 
-            }
-            .outer-arc_end-a {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg);
-            }
-            .outer-arc_start-b {
-              border-color: transparent transparent transparent var(--spinner); 
-              transform: var(--center) rotate(65deg) scale(-1, -1);
-            }
-            .outer-arc_end-b {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg) scale(-1, -1);
-            }
-
-            .outer-moon-a {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 15px;
-               height: 15px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(52px, 0); 
-            }
-            .outer-moon-b {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 15px;
-               height: 15px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(-52px, 0); 
-            }
-            .inner-spin {
-              animation: spin 3s linear infinite;
-            }
-            .inner-arc {
-              width: 62px;
-              height: 62px;
-            }
-            .inner-arc_start-a {
-              border-color: transparent transparent transparent var(--spinner);
-            /*NOTE: the order here very much matters!  */
-            /*  transform: var(--center) rotate(65deg); 
-            }
-            .inner-arc_end-a {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg);
-            }
-            .inner-arc_start-b {
-              border-color: transparent transparent transparent var(--spinner); 
-              transform: var(--center) rotate(65deg) scale(-1, -1);
-            }
-            .inner-arc_end-b {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg) scale(-1, -1);
-            }
-            .inner-moon-a {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 12px;
-               height: 12px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(33px, 0); 
-            }
-            .inner-moon-b {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 12px;
-               height: 12px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(-33px, 0); 
-            }
-            @keyframes spin { 100% {transform: rotate(360deg); } }*/
 
             .topnav {
               overflow: hidden;
@@ -312,28 +196,7 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
       // Initialize Firebase
-    var loadDate = "";  
-        
-        //Search filter
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        function filterFunction() {
-          var input, filter, ul, li, a, i;
-          input = document.getElementById("myInput");
-          filter = input.value.toUpperCase();
-          div = document.getElementById("myDropdown");
-          a = div.getElementsByTagName("a");
-          for (i = 0; i < a.length; i++) {
-            txtValue = a[i].textContent || a[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              a[i].style.display = "";
-            } else {
-              a[i].style.display = "none";
-            }
-          }
-        }
+    var loadDate = "";
         
     var config = {
         apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
@@ -355,6 +218,7 @@
                 name = user.displayName;
                 imageUrl = user.photoURL;
                 email = user.email;
+                droplets = user.droplets;
                 
                 loadDate = new Date().toString();
                     
@@ -371,6 +235,9 @@
                 
                 myphotodiv = document.getElementById("myphoto");
                 myphotodiv.innerHTML = "<img src='" + imageUrl + "' style='position:absolute; left: 1300px; top: 72px; width: 75px; height: 75px;'/>";
+                
+                mydropdiv = document.getElementById("mydroplets");
+                document.getElementById("mydroplets").innerHTML = droplets;
 
                 firebase.database().ref('/tweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
@@ -413,19 +280,82 @@
         } // end function
         
         // write user data
-        function writeUserData(userId, name, email, imageUrl) {
+        function writeUserData(userId, name, email, imageUrl, droplets) {
             firebase.database().ref('users/' + userId).once('value',    function(snapshot) {
                  if (!snapshot.exists()) {
                     firebase.database().ref('users/' + userId).set({
                         username: name,
                         email: email,
-                        profile_picture : imageUrl
+                        profile_picture : imageUrl,
+                        droplets: droplets
                     }); 
                  }                                      
             });
         }
         
-        
+        function updatetweets(data) {
+            //var mylist = "<ul>";
+            var mytab = "<br><br><br><table style='position:absolute; left: 275px;'>";
+            users = data[1]; // put on top, because changed data - not good coding change later
+            data = data[0];
+            
+            for (var u in data) {
+                for (var t in data[u]) {
+                    mytab = mytab + "<tr>";
+                    //var date = timeSince(new Date(Date.now()));
+                    var date = new Date(data[u][t].time);
+                    var time = date.toString();
+                    if (time.substring(0,15) == loadDate.substring(0,15)) {
+                        if (time.substring(16,18) == loadDate.substring(16,18)) {
+                            var num1 = Number(loadDate.substring(19,21));
+                            var num2 = Number(time.substring(19,21));
+                            console.log(num1);
+                            var num3 = num1 - num2;
+                            time = num3.toString() + " minutes ago";
+                        } else {
+                            var num1 = Number(loadDate.substring(16,18));
+                            var num2 = Number(time.substring(16,18));
+                            var num3 = num1 - num2;
+                            if (num3 == 1) {
+                                var num1 = Number(loadDate.substring(19,21));
+                                var num2 = Number(time.substring(19,21));
+                                console.log(num1);
+                                var num3 = num1 - num2 + 60;
+                                if (num3 > 59) {
+                                    time = "1 hour ago"
+                                } else {
+                                    time = num3.toString() + " minutes ago";
+                                }
+                            } else {
+                                time = num3.toString() + " hours ago";
+                            }
+                        }
+                    } else {
+                        time = time.substring(4,15);
+                    }
+                    //If there is an image posted
+                    if (data[u][t].img != "") {
+                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td>" + users[u].username + "</td>";
+                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
+                    } else {
+                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td>" + users[u].username + "</td>";
+                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td>" + time + "</td>";
+                        
+                        
+                    } 
+                    mytab = mytab + "</tr>";
+                }   
+            }
+            //mylist = mylist + "</ul>";
+            mytab = mytab + "</table>"
+            var mytdiv = document.getElementById("mytweets");
+            //mytdiv.innerHTML = mylist;
+            mytdiv.innerHTML = mytab;
+        }
         
         // write tweets to firebase
         function tweet() {
@@ -438,7 +368,7 @@
             var js_time = Date.now();
             var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time, img: imgValue});
             twitdoc.value = "";
-            writeUserData(userId, name, email, imageUrl);
+            writeUserData(userId, name, email, imageUrl, droplets);
             console.log("tweet written")
             
             firebase.database().ref('/tweets').once('value').then(function(snapshot) {
@@ -538,6 +468,15 @@
             //name = username;
         }
         
+        function like() {
+            alert("You liked Bob's Article! :)");
+            droplets += 5;
+        }
+    
+        function dislike() {
+            alert("You disliked Bob's Article :(");
+        }
+    
     </script>
 
     <body>
@@ -573,7 +512,7 @@
         
         <div class="topnav">
           <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
-          <a href="index.html" style="float:left"class="dropbtn"><img src="logo2.png" style="width: 15; height: 20px;"></a> 
+          <a href="index.html" style="float:left"class="dropbtn"><img src="logo2.png" style="width: 15; height: 20px;"></a>  
           <a href="soccer.html">Soccer</a>
           <a href="basketball.html">Basketball</a>
           <a href="nanotech.html">Nanotech</a>
@@ -593,13 +532,9 @@
         
         <div class="profcard">
           <img src="user.svg" alt="John" style="width:80; height:80;"> <h1 id="namediv"></h1>
-          <p><button onclick="changename()" style="width: 40px; height: 40px; cursor: pointer; background-color: #C0C0C0"><img src="pencil.png" style="width: 25; height: 25px;"></button></p>
-          <form onclick="changename()" method="get" id="nameform">
-            Username: <input type="text" name="username"><br>
-          </form>
           <p style="color: #B0C4DE" id="myemail">guest1@gmail.com</p>
           <p>Level: 15</p>
-          <p>Droplets: 810</p>
+          <p id="mydroplets">Droplets: 810</p>
           <p>Connections: 25</p>
           <p><button style="background: #0000CD; color: white;  width: 150px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Settings</button></p>
           <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Helvetica; font-size: 15px;">Log In</button></p>
@@ -607,12 +542,52 @@
         </div>
         
         <!--<button onclick="logout()">Log Oooout</button>-->
-      
+        
+        <div>
+        <center>
+        <p style="font-family: helvetica; font-size: 50px; font-weight: bold">Barcelona vs Man Utd: Top 3 Player Ratings</p>
+        <img src="barca.jpg" style="width: 1050; height: 625">
+        <br><br>    
+        <p>LIONEL MESSI - 9</p> 
+
+        <p>Subdued in the first leg, sublime here. What a first goal. What a show. What a wonderful player.</p>
+
+        <p>LUIS SUAREZ - 7</p> 
+
+        <p>Cut a frustrated figure at times but still did more than enough to keep United busy.</p>
+            
+        <p>PHILIPPE COUTINHO - 7</p> 
+
+        <p>Exploded into life with the kind of stunning strike we are used to seeing from him in the Premier League.</p>
+        </center>
+        </div>
+        
+        
+        <button onclick="like()" style="position: absolute; left: 450px; top: 1125px; width: 100px; height: 76px; background: url(like.png); font-family: Helvetica; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit"></button>
+        
+        <button onclick="dislike()" style="position: absolute; left: 650px; top: 1125px; width: 100px; height: 76px; background: url(dislike.png); font-family: Helvetica; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit"></button>
+        
+        <br><br><br><br><br><br><br><br><br><br><br>
+        <div class="textbox">
+        <form>
+            Send a Message!<br>
+            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4" style="font-family: Helvetica; font-size: 15px; font-weight: 100;"></textarea>
+        </form>
+        </div>
+        
+        <p align="center">
+        <button type="button" onclick="tweet()" style="align-content: center; font-family: Helvetica; background: #0000CD; color: white;  width: 75px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Send</button>
+        </p>
+        
+
+        <br><input class="textb" id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="position: absolute; left: 535px;"/>
+        <div id="imgTest" style="display:none;"></div>
 
     
     <div id="mytweets"></div>
     <div id="mydata"></div>
     <div id="myphoto"></div>
+    <div id="mydroplets"></div>
         
     </body>
     
