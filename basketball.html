@@ -17,126 +17,10 @@
               font-family: Helvetica, Helvetica, Helvetica;
               font-weight: lighter;
             }
-            
-            /*Loading spinner*/
-            /*html {
-              --spinner: #1EAAF0;
-              --center: translate(-50%, -50%);
-            }
-            .center {
-               position: absolute;
-               width: 30px;
-               height: 30px;
-               background: var(--spinner);
-               border-radius: 50%;
-               top: 50%;
-               left: 50%;
-               transform: var(--center); 
-            }
-            .outer-spin, .inner-spin {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-            }
-            .outer-spin {
-              animation: spin 4s linear infinite;
-            }
-            .outer-arc, .inner-arc {
-              position: absolute;
-              border-radius: 50%;
-              border: 4px solid;
-            }
-            .outer-arc {
-              width: 100px;
-              height: 100px;
-            }
-            .outer-arc_start-a {
-              border-color: transparent transparent transparent var(--spinner);
-              /*NOTE: the order here very much matters!  */
-            /*  transform: var(--center) rotate(65deg); 
-            }
-            .outer-arc_end-a {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg);
-            }
-            .outer-arc_start-b {
-              border-color: transparent transparent transparent var(--spinner); 
-              transform: var(--center) rotate(65deg) scale(-1, -1);
-            }
-            .outer-arc_end-b {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg) scale(-1, -1);
-            }
-
-            .outer-moon-a {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 15px;
-               height: 15px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(52px, 0); 
-            }
-            .outer-moon-b {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 15px;
-               height: 15px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(-52px, 0); 
-            }
-            .inner-spin {
-              animation: spin 3s linear infinite;
-            }
-            .inner-arc {
-              width: 62px;
-              height: 62px;
-            }
-            .inner-arc_start-a {
-              border-color: transparent transparent transparent var(--spinner);
-            /*NOTE: the order here very much matters!  */
-            /*  transform: var(--center) rotate(65deg); 
-            }
-            .inner-arc_end-a {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg);
-            }
-            .inner-arc_start-b {
-              border-color: transparent transparent transparent var(--spinner); 
-              transform: var(--center) rotate(65deg) scale(-1, -1);
-            }
-            .inner-arc_end-b {
-              border-color: var(--spinner) transparent transparent transparent;
-              transform: var(--center) rotate(45deg) scale(-1, -1);
-            }
-            .inner-moon-a {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 12px;
-               height: 12px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(33px, 0); 
-            }
-            .inner-moon-b {
-               position: absolute;
-               top:50%;
-               left:50%;
-               width: 12px;
-               height: 12px;
-               background: var(--spinner);
-               border-radius: 50%;
-               transform: var(--center) translate(-33px, 0); 
-            }
-            @keyframes spin { 100% {transform: rotate(360deg); } }*/
 
             .topnav {
               overflow: hidden;
-              background-color: #e9e9e9;
+              background-color: #1E90FF;
             }
 
             .topnav a {
@@ -276,6 +160,7 @@
               padding-top: 10px;
               padding-bottom: 10px;
               line-height: 0.5;
+              background-color: white;
             }
             
             div.textbox {
@@ -427,7 +312,7 @@
     
     </script>
 
-    <body>
+    <body style="background-color: aliceblue">
         
         <!--Loading spinner-->
         <div class="center"></div>
@@ -480,10 +365,6 @@
         
         <div class="profcard">
           <img src="user.svg" alt="John" style="width:80; height:80;"> <h1 id="namediv"></h1>
-          <p><button onclick="changename()" style="width: 40px; height: 40px; cursor: pointer; background-color: #C0C0C0"><img src="pencil.png" style="width: 25; height: 25px;"></button></p>
-          <form onclick="changename()" method="get" id="nameform">
-            Username: <input type="text" name="username"><br>
-          </form>
           <p style="color: #B0C4DE" id="myemail">guest1@gmail.com</p>
           <p>Level: 15</p>
           <p>Droplets: 810</p>
@@ -494,7 +375,7 @@
         
         <!--<button onclick="logout()">Log Oooout</button>-->
         <form action="barticle.html">
-            <input style="position: absolute; left: 200px; top: 100px; background: url(raps.png); font-family: Helvetica; width: 725px; height: 500px; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit">
+            <input type="submit" style="position: absolute; left: 200px; top: 100px; background: url(raps.png); font-family: Helvetica; width: 725px; height: 500px; font-family: Helvetica; font-size: 15px; cursor: pointer;" >
         </form>
 
     
