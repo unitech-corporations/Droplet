@@ -244,8 +244,8 @@
                 myphotodiv = document.getElementById("myphoto");
                 myphotodiv.innerHTML = "<img src='" + imageUrl + "' style='width: 75px; height: 75px;'/>";
                 
-                mydropdiv = document.getElementById("mydroplets");
-                document.getElementById("mydroplets").innerHTML = "Droplets: " + droplets;
+                /*mydropdiv = document.getElementById("mydroplets");
+                document.getElementById("mydroplets").innerHTML = "Droplets: " + droplets;*/
 
                 firebase.database().ref('/tweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
