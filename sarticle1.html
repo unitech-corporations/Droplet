@@ -197,6 +197,7 @@
     <script>
       // Initialize Firebase
     var loadDate = "";
+    var droplets;
         
     var config = {
         apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
@@ -218,7 +219,6 @@
                 name = user.displayName;
                 imageUrl = user.photoURL;
                 email = user.email;
-                droplets = user.droplets;
                 
                 loadDate = new Date().toString();
                     
@@ -237,7 +237,7 @@
                 myphotodiv.innerHTML = "<img src='" + imageUrl + "' style='position:absolute; left: 1300px; top: 72px; width: 75px; height: 75px;'/>";
                 
                 mydropdiv = document.getElementById("mydroplets");
-                document.getElementById("mydroplets").innerHTML = droplets;
+                document.getElementById("mydroplets").innerHTML = "Droplets: " + droplets;
 
                 firebase.database().ref('/tweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
@@ -470,7 +470,7 @@
         
         function like() {
             alert("You liked Bob's Article! :)");
-            droplets += 5;
+            droplets = droplets + 5;
         }
     
         function dislike() {
@@ -534,7 +534,7 @@
           <img src="user.svg" alt="John" style="width:80; height:80;"> <h1 id="namediv"></h1>
           <p style="color: #B0C4DE" id="myemail">guest1@gmail.com</p>
           <p>Level: 15</p>
-          <p id="mydroplets">Droplets: 810</p>
+          <p style="color:aqua" id="mydroplets">Droplets: 810</p>
           <p>Connections: 25</p>
           <p><button style="background: #0000CD; color: white;  width: 150px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Settings</button></p>
           <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Helvetica; font-size: 15px;">Log In</button></p>

@@ -72,16 +72,16 @@
             console.log("Logging in");
             var provider = new firebase.auth.GoogleAuthProvider();
             firebase.auth().signInWithRedirect(provider).then(function(result) { 
-                window.location.replace("index.html");
+                window.location.replace("home.html");
             });
-            window.location.replace("index.html");
+            window.location.replace("home.html");
         }
     
     </script>
 
     <body>
 
-        <form action="index.html">
+        <form action="home.html">
             <input style="position: absolute; top: 520; left: 560; background: #1E90FF; color: white;  width: 325px; height: 125px; font-family: Archivo Narrow; font-size: 75; font-weight: SemiBold; cursor: pointer;" type="submit" value="Log In" />
         </form>
         
