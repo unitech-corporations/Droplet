@@ -355,18 +355,70 @@
                 animation-duration : 0.5s;
                 animation-iteration-count : infinite;
             }
+            
+            .zoom:hover {
+              -ms-transform: scale(1.2); /* IE 9 */
+              -webkit-transform: scale(1.2); /* Safari 3-8 */
+              transform: scale(1.2); 
+            }
 
             
-            /*.textb {
-                background-color: #0000CD;
-            }*/
+            .drop {
+                background: #87CEEB;
+                width: 1px;
+                height: 89px;
+                position: absolute;
+                bottom: 200px;
+                -webkit-animation: fall .63s linear infinite;
+                -moz-animation: fall .63s linear infinite;
+               }
+            
+            #loadertitle {
+                color: #87CEEB;
+                font-family: Archivo Narrow;
+                font-size: 200px;
+                text-align: center;
+                margin-top: 250px;
+            }
+
+               @-webkit-keyframes fall { to {margin-top: 900px;}}
+               @-moz-keyframes fall { to {margin-top: 900px;}}
+
+            #myDiv {
+              display: none;
+              text-align: center;
+            }
+            
+            /* Add animation to "page content" */
+            .animate-bottom {
+              position: relative;
+              -webkit-animation-name: animatebottom;
+              -webkit-animation-duration: 1s;
+              animation-name: animatebottom;
+              animation-duration: 1s
+            }
+
+            @-webkit-keyframes animatebottom {
+              from { bottom:-100px; opacity:0 } 
+              to { bottom:0px; opacity:1 }
+            }
+
+            @keyframes animatebottom { 
+              from{ bottom:-100px; opacity:0 } 
+              to{ bottom:0; opacity:1 }
+            }
+
 
         </style>
     </head>
 
-    <body style="background-color: #F5F5F5">
-         
-        <div class="topnav">
+    <body style="background-color: #F5F5F5" onload="myFunction()">
+        
+        <div id="rain" class="rain"></div>
+        <div id="loadertitle">Droplet</div>
+        
+        <div style="display:none;" id="myDiv" class="animate-bottom">
+            <div class="topnav">
           <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
           <a href="home.html" class="dropbtn"><img src="logo2.png" style="width: 17; height: 23px;"></a> 
           
@@ -413,48 +465,67 @@
             
         </div>
         
-        <div id = "board"></div>
-        
                 
-        <div><p style="color: black; position: absolute; top: -40; left: 350px; font-family: Archivo Narrow; font-weight: bold; font-size: 100px;">Welcome to </p><p style="color: #87CEFA; position: absolute; top: -40; left: 810px; font-family: Archivo Narrow; font-weight: bold; font-size: 100px;">Droplet!</p></div><br><br><br><br><br><br><br><br><br><br><br>
+        <div><p style="color: black; position: absolute; top: -10; left: 150px; font-family: Archivo Narrow; font-weight: bold; font-size: 80px;">Don't Know What To Do?</p><p style="color: #87CEFA; position: absolute; top: -10; left: 910px; font-family: Archivo Narrow; font-weight: bold; font-size: 80px;">Let Us Help!</p></div><br><br><br><br><br><br><br>
         
-        <div class="slideshow-container">
-
-        <div class="mySlides fade">
-          <img src="sball.png" style="width:100%;">
+       
+        <div style="background-color: #FF0000; text-align: center; float: center; margin-left: 220; margin-right: 220;">
+            <p style="color: white; font-family: Archivo Narrow; font-weight: bold; font-size: 100px; height: 20px;">Explore Topics</p>
+            <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 40px;">Find something that interests you</p><br>
+            <p style="color: #FF0000; font-family: Archivo Narrow; font-weight: lighter; font-size: 25px; margin-left: 225; margin-right: 220; text-align: center; line-height: 40px;">Odosa is the Lead Programmer and Lead Designer of the Droplet Development Team. He works hard to make sure that the Droplet website is at its fully-functioning, professional-looking best. He also loves soccer and is huge fan of the greatest team in the world, FC Barcelona.</p>
+            <button onclick="location.href = 'sports.html'" style="background-color: #FFA07A; font-family: Archivo Narrow; font-size: 75px; position: absolute; left: 400px; top: 500px; color: white">Sports</button>
+            <button onclick="location.href = 'tech.html'" style="background-color: #B22222; font-family: Archivo Narrow; font-size: 75px; position: absolute; left: 800px; top: 500px; color: white">Tech</button>
+            <button onclick="location.href = 'politics.html'" style="background-color: #B22222; font-family: Archivo Narrow; font-size: 75px; position: absolute; left: 400px; top: 600px; color: white">Politics</button>
+            <button onclick="location.href = 'finance.html'" style="background-color: #FFA07A; font-family: Archivo Narrow; font-size: 75px; position: absolute; left: 800px; top: 600px; color: white">Finance</button>
         </div>
-
-        <div class="mySlides fade">
-          <img src="bball.png" style="width:100%;">
+        <br><br><br>
+        
+        <div style="background-color: #87CEFA; text-align: center; float: center; margin-left: 220; margin-right: 220;">
+            <p style="color: white; font-family: Archivo Narrow; font-weight: bold; font-size: 100px; height: 20px;">Chat With Someone</p>
+            <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 40px;">Find someone to chat with</p><br>
+            <center><button onclick="location.href = 'vidchat.html'" style="background-color: #1E90FF; font-family: Archivo Narrow; font-size: 75px; top: 550px; color: white">Video Chat</button></center>
+            <p style="color: #87CEFA; font-family: Archivo Narrow; font-weight: lighter; font-size: 1px; margin-left: 225; margin-right: 220; text-align: center; line-height: 40px;">Odosa is the </p>
         </div>
-
-        <div class="mySlides fade">
-          <img src="nano.png" style="width:100%;">
+        <br><br><br>
+        
+        <div style="background-color: #7CFC00; text-align: center; float: center; margin-left: 220; margin-right: 220;">
+            <p style="color: white; font-family: Archivo Narrow; font-weight: bold; font-size: 100px; height: 20px;">Connect With People</p>
+            <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 40px;">Connect with like-minded people</p><br>
+            <center><button onclick="location.href = 'connections.html'" style="background-color: #3CB371; font-family: Archivo Narrow; font-size: 75px; top: 550px; color: white">Connect</button></center>
+            <p style="color: #87CEFA; font-family: Archivo Narrow; font-weight: lighter; font-size: 1px; margin-left: 225; margin-right: 220; text-align: center; line-height: 40px;">Odosa is the </p>
         </div>
-            
-        <div class="mySlides fade">
-          <img src="ar.png" style="width:100%;">
+        <br><br><br>
+        
+        <div style="background-color: #FFD700; text-align: center; float: center; margin-left: 220; margin-right: 220;">
+            <p style="color: white; font-family: Archivo Narrow; font-weight: bold; font-size: 100px; height: 20px;">Play Games</p>
+            <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 40px;">Bored? Play some fun games!</p><br>
+            <center><button onclick="location.href = 'games.html'" style="background-color: #DAA520; font-family: Archivo Narrow; font-size: 75px; top: 550px; color: white">Play Now</button></center>
+            <p style="color: #87CEFA; font-family: Archivo Narrow; font-weight: lighter; font-size: 1px; margin-left: 225; margin-right: 220; text-align: center; line-height: 40px;">Odosa is the </p>
         </div>
-
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-        </div>
-        <br>
-
-        <div style="text-align:center">
-          <span class="dot" onclick="currentSlide(1)"></span> 
-          <span class="dot" onclick="currentSlide(2)"></span> 
-          <span class="dot" onclick="currentSlide(3)"></span> 
-          <span class="dot" onclick="currentSlide(4)"></span>
-        </div>
-        <br><br>
+        <br><br><br>
         
         <div style="background-color: #7B68EE; text-align: center; float: center; margin-left: 220; margin-right: 220;">
-            <p style="color: white; font-family: Archivo Narrow; font-weight: bold; font-size: 75px; height: 20px;">Our Mission Statement</p><br>
-            <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 45px;">We curate content, one droplet at a time.</p>
-            <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 25px; margin-left: 228; margin-right: 220; text-align: center; line-height: 40px;">Our mission is to provide users with the esiest way to connect with others on topics they love. Our mission is to provide top of the line information to our users so that they can focus on talking with others about them. Our mission is to make sure our users never have to worry about finding the information they love in the world.</p>
+            <p style="color: white; font-family: Archivo Narrow; font-weight: bold; font-size: 100px; height: 20px;">Who Are We?</p>
+            <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 40px;">Find out who made Droplet</p><br>
+            <center><button onclick="location.href = 'aboutus.html'" style="background-color: #9370DB; font-family: Archivo Narrow; font-size: 75px; top: 550px; color: white">About Us</button></center>
+            <p style="color: #87CEFA; font-family: Archivo Narrow; font-weight: lighter; font-size: 1px; margin-left: 225; margin-right: 220; text-align: center; line-height: 40px;">Odosa is the </p>
         </div>
+        <br><br><br>
+        
+        <div style="background-color: #FFA500; text-align: center; float: center; margin-left: 220; margin-right: 220;">
+            <p style="color: white; font-family: Archivo Narrow; font-weight: bold; font-size: 100px; height: 20px;">Ask Questions</p>
+            <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 40px;">Still confused? You can ask us anything!</p><br>
+            <center><button onclick="location.href = 'faq.html'" style="background-color: #FF8C00; font-family: Archivo Narrow; font-size: 75px; top: 550px; color: white">FAQ</button></center>
+            <p style="color: #87CEFA; font-family: Archivo Narrow; font-weight: lighter; font-size: 1px; margin-left: 225; margin-right: 220; text-align: center; line-height: 40px;">Odosa is the </p>
+        </div>
+        <br><br><br>
+        
+        <div style="background-color: #A9A9A9; text-align: center; float: center; margin-left: 220; margin-right: 220;">
+            <p style="color: white; font-family: Archivo Narrow; font-weight: bold; font-size: 100px; height: 20px;">Gain Droplets</p>
+            <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 40px;">Get Droplets to elevate your status in Droplet.</p>
+            <p style="color: white; font-family: Archivo Narrow; font-weight: lighter; font-size: 30px; margin-left: 200; margin-right: 200; text-align: center; line-height: 40px;">The more active you are, the more Droplets you'll get! Droplets help you jump levels, access unlockable content, and more!</p>
+        </div>
+        <br><br><br>
         
         <iframe src="song.mp3" allow="autoplay" style="display: none" id="iframeAudio"></iframe>
       
@@ -463,200 +534,48 @@
     <div id="mytweets"></div>
     <div id="mydata"></div>
     <div id="myphoto"></div>
+        </div>
         
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
-      // Initialize Firebase
         
-        var slideIndex = 1;
-        showSlides(slideIndex);
+        //Loader code
+        var myVar;
+        var nbDrop = 800;
+   
+           function randRange(maxNum, minNum) {
+            return (Math.floor(Math.random(10) * (maxNum - minNum + 1)) + minNum);
+           }
 
-        function plusSlides(n) {
-          showSlides(slideIndex += n);
-        }
+           function createRain() {
+            for (i = 0; i < nbDrop; i++) {
 
-        function currentSlide(n) {
-          showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-          var i;
-          var slides = document.getElementsByClassName("mySlides");
-          var dots = document.getElementsByClassName("dot");
-          if (n > slides.length) {slideIndex = 1}    
-          if (n < 1) {slideIndex = slides.length}
-          for (i = 0; i < slides.length; i++) {
-              slides[i].style.display = "none";  
-          }
-          for (i = 0; i < dots.length; i++) {
-              dots[i].className = dots[i].className.replace(" active", "");
-          }
-          slides[slideIndex-1].style.display = "block";  
-          dots[slideIndex-1].className += " active";
-        }
-        
-        //Search filter
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-
-        function filterFunction() {
-          var input, filter, ul, li, a, i;
-          input = document.getElementById("myInput");
-          filter = input.value.toUpperCase();
-          div = document.getElementById("myDropdown");
-          a = div.getElementsByTagName("a");
-          for (i = 0; i < a.length; i++) {
-            txtValue = a[i].textContent || a[i].innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              a[i].style.display = "";
-            } else {
-              a[i].style.display = "none";
+             var dropLeft = randRange(0, 3000);
+             var dropTop = randRange(-1000, 1000);
+             $('.rain').append('<div class="drop" id="drop'+ i +'"></div>');
+             $('#drop' + i).css('left', dropLeft);
+             $('#drop' + i).css('top', dropTop); 
             }
-          }
+           }
+
+        function stuff() {
+          myVar = setTimeout(showPage, 3000);
         }
         
-        var brd = document.createElement("DIV");
-		document.body.insertBefore(brd, document.getElementById("board"));
-		seeds = [];
-		particles = [];
-		const fwkPtcIniV = 0.5;
-		const fwkSedIniV = 0.5;
-		const fwkPtcIniT = 2500;
-		const fwkSedIniT = 1000;
-		const a = 0.0005;
-		const g = 0.0005;
-		const v = 0.3;
-		const cursorXOffset = 5;
-		const cursorYOffset = 0;
-		function newFireworkParticle(x, y, angle)
-		{
-			var fwkPtc = document.createElement("DIV");
-			fwkPtc.setAttribute('class', 'fireWorkParticle');
-			fwkPtc.time = fwkPtcIniT;
-			while(angle > 360)
-				angle -= 360;
-			while(angle < 0)
-				angle += 360;
-			fwkPtc.velocity = [];
-			if(angle > 270)
-			{
-				fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
-				fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
-			}
-			else if(angle > 180)
-			{
-				fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
-				fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
-			}
-			else if(angle > 90)
-			{
-				fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
-				fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
-			}
-			else
-			{
-				fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
-				fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
-			}
-			fwkPtc.position = [];
-			fwkPtc.position.x = x;
-			fwkPtc.position.y = y;
-			fwkPtc.style.left = fwkPtc.position.x + 'px';
-			fwkPtc.style.top = fwkPtc.position.y + 'px';
-			if(particles == null)
-				particles = [];
-			particles.push(fwkPtc);
-			return fwkPtc;
-		}
-		document.addEventListener("click", newFireWorkOnClick);
-		function newFireWorkOnClick(event)
-		{
-			newFireworkSeed(event.pageX - brd.offsetLeft + cursorXOffset, event.pageY - brd.offsetTop + cursorYOffset);
-		}
-		function newFireworkSeed(x, y)
-		{
-			var fwkSed = document.createElement("DIV");
-			fwkSed.setAttribute('class', 'fireWorkSeed');
-			brd.appendChild(fwkSed);
-			fwkSed.time = fwkSedIniT;
-			fwkSed.velocity = [];
-			fwkSed.velocity.x = 0;
-			fwkSed.velocity.y = fwkSedIniV;
-			fwkSed.position = [];
-			fwkSed.position.x = x;
-			fwkSed.position.y = y;
-			fwkSed.style.left = fwkSed.position.x + 'px';
-			fwkSed.style.top = fwkSed.position.y + 'px';
-			if(seeds == null)
-				seeds = [];
-			seeds.push(fwkSed);
-			return fwkSed;
-		}
-		
-		function newFireWorkStar(x, y)
-		{
-			var fwkBch = document.createElement("DIV");
-			fwkBch.setAttribute('class', 'fireWorkBatch');
-			var a = 0;
-			while(a < 360)
-			{
-				var fwkPtc = newFireworkParticle(x, y, a);
-				fwkBch.appendChild(fwkPtc);
-				a += 5;
-			}
-			brd.appendChild(fwkBch);
-		}
-		var before = Date.now();
-		var id = setInterval(frame, 5);
-		
-		function frame()
-		{
-			var current = Date.now();
-			var deltaTime = current - before;
-			before = current;
-			for(i in seeds)
-			{
-				var fwkSed = seeds[i];
-				fwkSed.time -= deltaTime;
-				if(fwkSed.time > 0)
-				{
-					fwkSed.velocity.x -= fwkSed.velocity.x * a * deltaTime;
-					fwkSed.velocity.y -= g * deltaTime + fwkSed.velocity.y * a * deltaTime;
-					fwkSed.position.x += fwkSed.velocity.x * deltaTime;
-					fwkSed.position.y -= fwkSed.velocity.y * deltaTime;
-					fwkSed.style.left = fwkSed.position.x + 'px';
-					fwkSed.style.top = fwkSed.position.y + 'px';
-				}
-				else
-				{
-					newFireWorkStar(fwkSed.position.x, fwkSed.position.y);
-					fwkSed.parentNode.removeChild(fwkSed);
-					seeds.splice(i, 1);
-				}
-			}
-			for(i in particles)
-			{
-				var fwkPtc = particles[i];
-				fwkPtc.time -= deltaTime;
-				if(fwkPtc.time > 0)
-				{
-					fwkPtc.velocity.x -= fwkPtc.velocity.x * a * deltaTime;
-					fwkPtc.velocity.y -= g * deltaTime + fwkPtc.velocity.y * a * deltaTime;
-					fwkPtc.position.x += fwkPtc.velocity.x * deltaTime;
-					fwkPtc.position.y -= fwkPtc.velocity.y * deltaTime;
-					fwkPtc.style.left = fwkPtc.position.x + 'px';
-					fwkPtc.style.top = fwkPtc.position.y + 'px';
-				}
-				else
-				{
-					fwkPtc.parentNode.removeChild(fwkPtc);
-					particles.splice(i, 1);
-				}
-			}
-		}
+        function myFunction() {
+            createRain();
+            stuff();
+        }
+
+        function showPage() {
+          document.getElementById("rain").style.display = "none";
+          document.getElementById("loadertitle").style.display = "none";
+          document.getElementById("myDiv").style.display = "block";
+        }
         
+      // Initialize Firebase
     var loadDate = "";
     var droplets = 0;
         

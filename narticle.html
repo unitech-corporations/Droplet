@@ -7,20 +7,20 @@
         
         <style>
             
-            tr:hover {background-color: #B0E0E6;}
+             tr:hover {background-color: #B0E0E6;}
             th, td {border-bottom: 1px solid #ddd;}
             
             * {box-sizing: border-box;}
 
             body {
               margin: 0;
-              font-family: Helvetica, Helvetica, Helvetica;
+              font-family: Archivo Narrow, Archivo Narrow, Archivo Narrow;
               font-weight: lighter;
             }
-            
+
             .topnav {
               overflow: hidden;
-              background-color: #1E90FF;
+              background-color: white;
             }
 
             .topnav a {
@@ -30,11 +30,13 @@
               text-align: center;
               padding: 14px 16px;
               text-decoration: none;
-              font-size: 17px;
+              font-size: 20px;
+              font-family: Archivo Narrow;
+              font-weight: lighter;
             }
 
-            .topnav a:hover, .dropdown:hover {
-              background-color: #0000CD;
+            .topnav a:hover, .dropdown:hover, .dropbtn:hover {
+              background-color: #87CEFA;
               color: white;
             }
             
@@ -44,8 +46,9 @@
               text-align: center;
               padding: 14px 16px;
               text-decoration: none;
-              font-size: 17px;
-              font-family: Helvetica;
+              font-size: 20px;
+              font-family: Archivo Narrow;
+              font-weight: lighter;
             }
 
             .topnav a.active {
@@ -70,8 +73,8 @@
               margin-top: 8px;
               margin-right: 16px;
               background: #ddd;
-              font-family: Helvetica;
-              font-size: 17px;
+              font-size: 20px;
+              font-family: Archivo Narrow;
               font-weight: lighter;
               border: none;
               cursor: pointer;
@@ -92,7 +95,9 @@
               outline: none;
               padding: 14px 16px;
               background-color: inherit;
-              font-family: Helvetica;
+              font-size: 20px;
+              font-family: Archivo Narrow;
+              font-weight: lighter;
               margin: 0;
             }
             
@@ -101,7 +106,7 @@
               border: none;
               outline: none;
               padding: 14px 16px;
-              font-family: Helvetica;
+              font-family: Archivo Narrow;
               margin: 0;
             }
             
@@ -291,7 +296,7 @@
         
         function updatetweets(data) {
             //var mylist = "<ul>";
-            var mytab = "<br><br><br><table style='position:absolute; left: 275px;'>";
+            var mytab = "<br><br><br><center><table style='background-color: #FEEFFF; width: 875px;'></center>";
             users = data[1]; // put on top, because changed data - not good coding change later
             data = data[0];
             
@@ -305,7 +310,7 @@
                         if (time.substring(16,18) == loadDate.substring(16,18)) {
                             var num1 = Number(loadDate.substring(19,21));
                             var num2 = Number(time.substring(19,21));
-                            console.log(num1);
+                            console.log(time);
                             var num3 = num1 - num2;
                             time = num3.toString() + " minutes ago";
                         } else {
@@ -319,7 +324,8 @@
                                 var num3 = num1 - num2 + 60;
                                 if (num3 > 59) {
                                     time = "1 hour ago"
-                                } else {
+                                } 
+                                else {
                                     time = num3.toString() + " minutes ago";
                                 }
                             } else {
@@ -331,16 +337,39 @@
                     }
                     //If there is an image posted
                     if (data[u][t].img != "") {
-                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
-                        mytab = mytab + "<td>" + users[u].username + "</td>";
-                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
-                        mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
-                    } else {
-                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
-                        mytab = mytab + "<td>" + users[u].username + "</td>";
-                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
-                        mytab = mytab + "<td>" + time + "</td>";
                         
+                        mytab = mytab + "<tr>";
+                        mytab = mytab + "<td rowspan = 3>" + "<img src='" + users[u].profile_picture + "' width='100px'></td>";
+                        mytab = mytab + "<td style='font-family: Archivo Narrow; font-weight: bold; font-size: 25px;'>" + users[u].username + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<td style='color: #87CEFA;'>" + users[u].email + "</td>";
+                        mytab = mytab + "<td style = 'font-family: Archivo Narrow; font-weight: 200; font-size: 20px; text-align: center;'>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<td style='color:#B0C4DE'>" + time + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<tr>";
+                        mytab = mytab + "<td colspan = 3 style = 'text-align:center'>" + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
+                        
+                        mytab = mytab + "<td style='height:25px;'></td>";
+
+                    } else {
+                        
+                        mytab = mytab + "<tr>";
+                        mytab = mytab + "<td rowspan = 3>" + "<img src='" + users[u].profile_picture + "' width='100px'></td>";
+                        mytab = mytab + "<td style='font-family: Archivo Narrow; font-weight: bold; font-size: 25px;'>" + users[u].username + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<td style='color: #87CEFA;'>" + users[u].email + "</td>";
+                        mytab = mytab + "<td style = 'font-family: Archivo Narrow; font-weight: 200; font-size: 20px; text-align: center;'>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<td style='color:#B0C4DE'>" + time + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<td style='height:25px;'></td>";
                         
                     } 
                     mytab = mytab + "</tr>";
@@ -466,7 +495,7 @@
     
     </script>
 
-    <body style="background-color: aliceblue">
+    <body style="background-color: black">
         
         <!--Loading spinner-->
         <div class="center"></div>
@@ -499,58 +528,78 @@
         
         <div class="topnav">
           <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
-          <a href="home.html" style="float:left"class="dropbtn"><img src="logo2.png" style="width: 15; height: 20px;"></a>  
-          <a href="soccer.html">Soccer</a>
-          <a href="basketball.html">Basketball</a>
-          <a href="nanotech.html">Nanotech</a>
-          <a href="ar.html">Augmented Reality</a>
-        
+          <a href="home.html" class="dropbtn"><img src="logo2.png" style="width: 17; height: 23px;"></a> 
+          
         <div class="dropdown" style="font-family: helvetica; ">
-          <button onclick="myFunction()" class="dropbtn">Find Favorites</button>
+          <button onclick="myFunction()" class="dropbtn">Topics</button>
           <div id="myDropdown" class="dropdown-content">
-            <input type="text" placeholder="Search Droplet..." id="myInput" onkeyup="filterFunction()">
-            <a href="soccer.html">Soccer</a>
-            <a href="basketball.html">Basketball</a>
-            <a href="nanotech.html">Nanotech</a>
-            <a href="ar.html">Augmented Reality</a>
+            <a href="sports.html">Sports</a>
+            <a href="tech.html">Tech</a>
+            <a href="politics.html">Politics</a>
+            <a href="finance.html">Finance</a>
           </div>
         </div>
+            
+        <a href="vidchat.html" class="dropbtn" style="font-family: Archivo Narrow;">Video Chat</a>
+            
+        <a href="connections.html" class="dropbtn" style="font-family: Archivo Narrow;">Connections</a>
+            
+        <div class="dropdown" style="font-family: helvetica; ">
+          <button onclick="myFunction()" class="dropbtn">Games</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="soccer.html">???</a>
+            <a href="basketball.html">???</a>
+            <a href="hockey.html">???</a>
+          </div>
         </div>
-        
-        <div class="profcard">
-          <img src="user.svg" alt="John" style="width:80; height:80;"> <h1 id="namediv"></h1>
-          <p style="color: #B0C4DE" id="myemail">guest1@gmail.com</p>
-          <p>Level: 15</p>
-          <p>Droplets: 810</p>
-          <p>Connections: 25</p>
-          <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Helvetica; font-size: 15px;">Log In</button></p>
-          <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Helvetica; font-size: 15px;">Log Out</button></p>
+            
+        <a href="suggestions.html" class="dropbtn" style="font-family: Archivo Narrow;">Suggestions</a>
+            
+        <a href="aboutus.html" class="dropbtn" style="font-family: Archivo Narrow;">About Us</a>
+            
+        <a href="faq.html" class="dropbtn" style="font-family: Archivo Narrow;">FAQ</a>
+            
+        <div class="dropdown" style="font-family: helvetica; float: right;">
+          <button onclick="myFunction()" class="dropbtn"><img id="myphoto" src="logo2.png" style="width: 15; height: 20px;"></button>
+            <div id="myDropdown" class="dropdown-content" style="position: absolute; left: 1140px; width: 300px; text-align: center;">
+            <h1 style="color: #000;" id="namediv">User</h1>
+            <a style="color: #B0C4DE; text-align: center;" id="myemail">guest1@gmail.com</a>
+            <a id="mylevel" style="text-align: center;">Level: Puddle</a>
+            <a id="mydroplets" style="text-align: center;">Connections: 1</a>
+            <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log In</button></p>
+            <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log Out</button></p>
+              </div>
         </div>
-        
+            
+        </div>
         <!--<button onclick="logout()">Log Oooout</button>-->
         
-        <div>
         <center>
-        <p style="font-family: helvetica; font-size: 50px; font-weight: bold">New nanomaterial to replace mercury</p>
+        <p style="font-family: helvetica; font-size: 50px; font-weight: bold; color: white">New nanomaterial to replace mercury</p>
         <img src="graphene.jpg" style="width: 1050; height: 625">
-        <br><br>    
-        <p>The nano research team at the Norwegian University of Science and Technology has succeeded in creating LEDs from a nanomaterial that emits ultraviolet light.</p> 
-
-        <p>It is the first time anyone has created ultraviolet light on a graphene surface.</p>
-
-        <p>"We've shown that it's possible, which is really exciting," says Ida Marie Hoiaas.</p> 
-
-        <p>"We've created a new electronic component that has the potential to become a commercial product," Hoiaas says.</p>
-            
-        <p>What do you think about this article? Leave a comment below!</p> 
-
         </center>
+        <br><br>   
+        <div style="margin-left: 200">
+        <p style="color: white">The nano research team at the Norwegian University of Science and Technology has succeeded in creating LEDs from a nanomaterial that emits ultraviolet light.</p><br>
+
+        <p style="color: white">It is the first time anyone has created ultraviolet light on a graphene surface.</p><br>
+
+        <p style="color: white">"We've shown that it's possible, which is really exciting," says Ida Marie Hoiaas.</p><br>
+
+        <p style="color: white">"We've created a new electronic component that has the potential to become a commercial product," Hoiaas says.</p><br>
+            
+        <p style="color: white">What do you think about this article? Leave a comment below!</p><br>
         </div>
+
+        <center>
+        <button onclick="like()" style="margin-left: 100; position: absolute; left: 450px; top: 1255px; width: 100px; height: 76px; background: url(like.png); font-family: Helvetica; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit"></button>
         
-        <br><br><br>
+        <button onclick="dislike()" style="margin-left: 100; position: absolute; left: 650px; top: 1255px; width: 100px; height: 76px; background: url(dislike.png); font-family: Helvetica; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit"></button>
+        
+        <br><br><br><br><br><br><br><br><br><br><br>
         <div class="textbox">
-        <form>
-            Send a Message!<br>
+        <form style="color: white">
+            Send a Message!<br><br>
             <textarea id="twit" type="text" name="thetweet" cols="100" rows="4" style="font-family: Helvetica; font-size: 15px; font-weight: 100;"></textarea>
         </form>
         </div>
@@ -560,8 +609,9 @@
         </p>
         
 
-        <br><input class="textb" id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="position: absolute; left: 635px;"/>
+        <br><input class="textb" id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="position: absolute; left: 680px;"/>
         <div id="imgTest" style="display:none;"></div>
+        </center>
 
     
     <div id="mytweets"></div>

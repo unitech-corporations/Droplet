@@ -7,20 +7,19 @@
         
         <style>
             
-            tr:hover {background-color: #B0E0E6;}
             th, td {border-bottom: 1px solid #ddd;}
             
             * {box-sizing: border-box;}
 
             body {
               margin: 0;
-              font-family: Helvetica, Helvetica, Helvetica;
+              font-family: Archivo Narrow, Archivo Narrow, Archivo Narrow;
               font-weight: lighter;
             }
 
             .topnav {
               overflow: hidden;
-              background-color: #1E90FF;
+              background-color: white;
             }
 
             .topnav a {
@@ -30,11 +29,13 @@
               text-align: center;
               padding: 14px 16px;
               text-decoration: none;
-              font-size: 17px;
+              font-size: 20px;
+              font-family: Archivo Narrow;
+              font-weight: lighter;
             }
 
-            .topnav a:hover, .dropdown:hover {
-              background-color: #0000CD;
+            .topnav a:hover, .dropdown:hover, .dropbtn:hover {
+              background-color: #87CEFA;
               color: white;
             }
             
@@ -44,8 +45,9 @@
               text-align: center;
               padding: 14px 16px;
               text-decoration: none;
-              font-size: 17px;
-              font-family: Helvetica;
+              font-size: 20px;
+              font-family: Archivo Narrow;
+              font-weight: lighter;
             }
 
             .topnav a.active {
@@ -68,10 +70,10 @@
               float: right;
               padding: 6px 10px;
               margin-top: 8px;
-              margin-right: 16px;
+              margin-right: 18px;
               background: #ddd;
-              font-family: Helvetica;
-              font-size: 17px;
+              font-size: 20px;
+              font-family: Archivo Narrow;
               font-weight: lighter;
               border: none;
               cursor: pointer;
@@ -92,7 +94,9 @@
               outline: none;
               padding: 14px 16px;
               background-color: inherit;
-              font-family: Helvetica;
+              font-size: 20px;
+              font-family: Archivo Narrow;
+              font-weight: lighter;
               margin: 0;
             }
             
@@ -101,7 +105,7 @@
               border: none;
               outline: none;
               padding: 14px 16px;
-              font-family: Helvetica;
+              font-family: Archivo Narrow;
               margin: 0;
             }
             
@@ -184,20 +188,362 @@
             #myInput:focus {outline: 3px solid #ddd;}
             
             .show {display:block;}
+            
+            * {box-sizing: border-box}
+            .mySlides {display: none}
+            img {vertical-align: middle;}
 
+            /* Slideshow container */
+            .slideshow-container {
+              max-width: 1000px;
+              position: relative;
+              margin: auto;
+            }
+
+            /* Next & previous buttons */
+            .prev, .next {
+              cursor: pointer;
+              position: absolute;
+              top: 50%;
+              width: auto;
+              padding: 16px;
+              margin-top: -22px;
+              color: white;
+              font-weight: bold;
+              font-size: 18px;
+              transition: 0.6s ease;
+              border-radius: 0 3px 3px 0;
+              user-select: none;
+            }
+
+            /* Position the "next button" to the right */
+            .next {
+              right: 0;
+              border-radius: 3px 0 0 3px;
+            }
+
+            /* On hover, add a black background color with a little bit see-through */
+            .prev:hover, .next:hover {
+              background-color: rgba(0,0,0,0.8);
+            }
+
+            /* Caption text */
+            .text {
+              color: #f2f2f2;
+              font-size: 15px;
+              padding: 8px 12px;
+              position: absolute;
+              bottom: 8px;
+              width: 100%;
+              text-align: center;
+              font-family: Archivo Narrow;
+              font-weight: 700;
+              font-size: 30;
+            }
+
+            /* Number text (1/3 etc) */
+            .numbertext {
+              color: #f2f2f2;
+              font-size: 12px;
+              padding: 8px 12px;
+              position: absolute;
+              top: 0;
+            }
+
+            /* The dots/bullets/indicators */
+            .dot {
+              cursor: pointer;
+              height: 15px;
+              width: 15px;
+              margin: 0 2px;
+              background-color: #bbb;
+              border-radius: 50%;
+              display: inline-block;
+              transition: background-color 0.6s ease;
+            }
+
+            .active, .dot:hover {
+              background-color: #717171;
+            }
+
+            /* Fading animation */
+            .fade {
+              -webkit-animation-name: fade;
+              -webkit-animation-duration: 1.5s;
+              animation-name: fade;
+              animation-duration: 1.5s;
+            }
+
+            @-webkit-keyframes fade {
+              from {opacity: .4} 
+              to {opacity: 1}
+            }
+
+            @keyframes fade {
+              from {opacity: .4} 
+              to {opacity: 1}
+            }
+
+            /* On smaller screens, decrease text size */
+            @media only screen and (max-width: 300px) {
+              .prev, .next,.text {font-size: 11px}
+            }
             
-            /*.textb {
-                background-color: #0000CD;
-            }*/
+            /*Fireworks*/
+           @keyframes 			firework-animation {
+			0% {background-color : #ff8426;}
+			25% {background-color : #fffc84;}
+			50% {background-color : #ff83f4;}
+			75% {background-color : #83b6ff;}
+			100% {background-color : #ff8426;}
+            }
+            @-webkit-keyframes 	firework-animation {
+                0% {background-color : #ff8426;}
+                25% {background-color : #fffc84;}
+                50% {background-color : #ff83f4;}
+                75% {background-color : #83b6ff;}
+                100% {background-color : #ff8426;}
+            }
+            @keyframes 			firework-seed-animation	{
+                0% {background-color : #ff8426;}
+                25% {background-color : #fffc84;}
+                100% {background-color : #ff8426;}
+            }
+            @-webkit-keyframes	firework-seed-animation	{
+                0% {background-color : #ff8426;}
+                25% {background-color : #fffc84;}
+                100% {background-color : #ff8426;}
+            }
+            @keyframes 			firework-fade-animation {
+                0% {opacity : 1;}
+                50% {opacity : 1;}
+                100% {opacity : 0;}
+            }
+            @-webkit-keyframes 	firework-fade-animation {
+                0% {opacity : 1;}
+                50% {opacity : 1;}
+                100% {opacity : 0;}
+            }
+            .fireWorkBatch {
+                z-index : 999;
+                position: absolute;
+                top : 0px;
+                left : 0px;
+                animation-name : firework-fade-animation;
+                animation-timing-function : cubic-bezier(0.5, 0, 1. 1);
+                animation-duration : 2.5s;
+            }
+            .fireWorkParticle {
+                z-index : 999;
+                position: absolute;
+                height : 5px;
+                width : 5px;
+                border-radius : 2.5px;
+                animation-name : firework-animation;
+                animation-timing-function : linear;
+                animation-duration : 1s;
+                animation-iteration-count : infinite;
+            }
+            .fireWorkSeed {
+                z-index : 999;
+                position: absolute;
+                height : 5px;
+                width : 5px;
+                border-radius : 5px;
+                animation-name : firework-seed-animation;
+                animation-timing-function : linear;
+                animation-duration : 0.5s;
+                animation-iteration-count : infinite;
+            }
+
+            .drop {
+                background: #87CEEB;
+                width: 1px;
+                height: 89px;
+                position: absolute;
+                bottom: 200px;
+                -webkit-animation: fall .63s linear infinite;
+                -moz-animation: fall .63s linear infinite;
+               }
             
+            #loadertitle {
+                color: #87CEEB;
+                font-family: Archivo Narrow;
+                font-size: 200px;
+                text-align: center;
+                margin-top: 250px;
+            }
+
+               @-webkit-keyframes fall { to {margin-top: 900px;}}
+               @-moz-keyframes fall { to {margin-top: 900px;}}
+
+            #myDiv {
+              display: none;
+              text-align: center;
+            }
+            
+            /* Add animation to "page content" */
+            .animate-bottom {
+              position: relative;
+              -webkit-animation-name: animatebottom;
+              -webkit-animation-duration: 1s;
+              animation-name: animatebottom;
+              animation-duration: 1s
+            }
+
+            @-webkit-keyframes animatebottom {
+              from { bottom:-100px; opacity:0 } 
+              to { bottom:0px; opacity:1 }
+            }
+
+            @keyframes animatebottom { 
+              from{ bottom:-100px; opacity:0 } 
+              to{ bottom:0; opacity:1 }
+            }
+
         </style>
     </head>
 
+    <body style="background-color: #F5F5F5" onload="myFunction()">
+        
+        <div id="rain" class="rain"></div>
+        <div id="loadertitle">Droplet</div>
+        
+        <div style="display:none;" id="myDiv" class="animate-bottom">
+        
+            <div class="topnav">
+              <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
+              <a href="home.html" class="dropbtn"><img src="logo2.png" style="width: 17; height: 23px;"></a> 
+
+            <div class="dropdown" style="font-family: helvetica; ">
+              <button onclick="myFunction()" class="dropbtn">Topics</button>
+              <div id="myDropdown" class="dropdown-content">
+                <a href="sports.html">Sports</a>
+                <a href="tech.html">Tech</a>
+                <a href="politics.html">Politics</a>
+                <a href="finance.html">Finance</a>
+              </div>
+            </div>
+
+            <a href="vidchat.html" class="dropbtn" style="font-family: Archivo Narrow;">Video Chat</a>
+
+            <a href="connections.html" class="dropbtn" style="font-family: Archivo Narrow;">Connections</a>
+
+            <div class="dropdown" style="font-family: helvetica; ">
+              <button onclick="myFunction()" class="dropbtn">Games</button>
+              <div id="myDropdown" class="dropdown-content">
+                <a href="soccer.html">???</a>
+                <a href="basketball.html">???</a>
+                <a href="hockey.html">???</a>
+              </div>
+            </div>
+
+            <a href="suggestions.html" class="dropbtn" style="font-family: Archivo Narrow;">Suggestions</a>
+
+            <a href="aboutus.html" class="dropbtn" style="font-family: Archivo Narrow;">About Us</a>
+
+            <a href="faq.html" class="dropbtn" style="font-family: Archivo Narrow;">FAQ</a>
+
+            <div class="dropdown" style="font-family: helvetica; float: right;">
+              <button onclick="myFunction()" class="dropbtn"><img id="myphoto" src="logo2.png" style="width: 15; height: 20px;"></button>
+                <div id="myDropdown" class="dropdown-content" style="position: absolute; left: 1140px; width: 300px; text-align: center;">
+                <h1 style="color: #000;" id="namediv">User</h1>
+                <a style="color: #B0C4DE; text-align: center;" id="myemail">guest1@gmail.com</a>
+                <a id="mylevel" style="text-align: center;">Level: Puddle</a>
+                <a id="mydroplets" style="text-align: center;">Connections: 1</a>
+                <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log In</button></p>
+                <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log Out</button></p>
+                  </div>
+            </div>
+
+            </div>
+
+            <div id = "board"></div>
+
+
+            <div><p style="color: black; position: absolute; top: -40; left: 350px; font-family: Archivo Narrow; font-weight: bold; font-size: 100px;">Welcome to </p><p style="color: #87CEFA; position: absolute; top: -40; left: 810px; font-family: Archivo Narrow; font-weight: bold; font-size: 100px;">Droplet!</p></div><br><br><br><br><br><br><br><br><br><br><br>
+
+            <div class="slideshow-container">
+
+            <div class="mySlides fade">
+              <img src="sball.png" style="width:100%;">
+            </div>
+
+            <div class="mySlides fade">
+              <img src="bball.png" style="width:100%;">
+            </div>
+
+            <div class="mySlides fade">
+              <img src="nano.png" style="width:100%;">
+            </div>
+
+            <div class="mySlides fade">
+              <img src="ar.png" style="width:100%;">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            </div>
+            <br>
+
+            <div style="text-align:center">
+              <span class="dot" onclick="currentSlide(1)"></span> 
+              <span class="dot" onclick="currentSlide(2)"></span> 
+              <span class="dot" onclick="currentSlide(3)"></span> 
+              <span class="dot" onclick="currentSlide(4)"></span>
+            </div>
+            <br><br>
+
+            <div style="background-color: #7B68EE; text-align: center; float: center; margin-left: 220; margin-right: 220;">
+                <p style="color: white; font-family: Archivo Narrow; font-weight: bold; font-size: 75px; height: 20px;">Our Mission Statement</p><br>
+                <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 45px;">We curate content, one droplet at a time.</p>
+                <p style="color: white; font-family: Archivo Narrow; font-weight: 100; font-size: 25px; margin-left: 228; margin-right: 220; text-align: center; line-height: 40px;">Our mission is to provide users with the esiest way to connect with others on topics they love. Our mission is to provide top of the line information to our users so that they can focus on talking with others about them. Our mission is to make sure our users never have to worry about finding the information they love in the world.</p>
+            </div>
+
+            <iframe src="Wow.mp3" allow="autoplay" style="display: none" id="iframeAudio"></iframe>
+
+
+
+        <div id="mytweets"></div>
+        <div id="mydata"></div>
+        <div id="myphoto"></div>
+    
+    </div>
+         
+        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>    
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
       // Initialize Firebase
-    var loadDate = "";  
+        
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          if (n > slides.length) {slideIndex = 1}    
+          if (n < 1) {slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+              slides[i].style.display = "none";  
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[slideIndex-1].style.display = "block";  
+          dots[slideIndex-1].className += " active";
+        }
         
         //Search filter
         function myFunction() {
@@ -219,6 +565,183 @@
             }
           }
         }
+        
+        //Loader code
+        var myVar;
+        var nbDrop = 800;
+   
+           function randRange(maxNum, minNum) {
+            return (Math.floor(Math.random(10) * (maxNum - minNum + 1)) + minNum);
+           }
+
+           function createRain() {
+            for (i = 0; i < nbDrop; i++) {
+
+             var dropLeft = randRange(0, 3000);
+             var dropTop = randRange(-1000, 1000);
+             $('.rain').append('<div class="drop" id="drop'+ i +'"></div>');
+             $('#drop' + i).css('left', dropLeft);
+             $('#drop' + i).css('top', dropTop); 
+            }
+           }
+
+        function stuff() {
+          myVar = setTimeout(showPage, 3000);
+        }
+        
+        function myFunction() {
+            createRain();
+            stuff();
+        }
+
+        function showPage() {
+          document.getElementById("rain").style.display = "none";
+          document.getElementById("loadertitle").style.display = "none";
+          document.getElementById("myDiv").style.display = "block";
+        }
+        
+        var brd = document.createElement("DIV");
+		document.body.insertBefore(brd, document.getElementById("board"));
+		seeds = [];
+		particles = [];
+		const fwkPtcIniV = 0.5;
+		const fwkSedIniV = 0.5;
+		const fwkPtcIniT = 2500;
+		const fwkSedIniT = 1000;
+		const a = 0.0005;
+		const g = 0.0005;
+		const v = 0.3;
+		const cursorXOffset = 5;
+		const cursorYOffset = 0;
+		function newFireworkParticle(x, y, angle)
+		{
+			var fwkPtc = document.createElement("DIV");
+			fwkPtc.setAttribute('class', 'fireWorkParticle');
+			fwkPtc.time = fwkPtcIniT;
+			while(angle > 360)
+				angle -= 360;
+			while(angle < 0)
+				angle += 360;
+			fwkPtc.velocity = [];
+			if(angle > 270)
+			{
+				fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
+				fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
+			}
+			else if(angle > 180)
+			{
+				fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
+				fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
+			}
+			else if(angle > 90)
+			{
+				fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
+				fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
+			}
+			else
+			{
+				fwkPtc.velocity.x = fwkPtcIniV * Math.sin(angle * Math.PI / 180) * (1 - Math.random() * v);
+				fwkPtc.velocity.y = fwkPtcIniV * Math.cos(angle * Math.PI / 180) * (1 - Math.random() * v);
+			}
+			fwkPtc.position = [];
+			fwkPtc.position.x = x;
+			fwkPtc.position.y = y;
+			fwkPtc.style.left = fwkPtc.position.x + 'px';
+			fwkPtc.style.top = fwkPtc.position.y + 'px';
+			if(particles == null)
+				particles = [];
+			particles.push(fwkPtc);
+			return fwkPtc;
+		}
+		document.addEventListener("click", newFireWorkOnClick);
+		function newFireWorkOnClick(event)
+		{
+			newFireworkSeed(event.pageX - brd.offsetLeft + cursorXOffset, event.pageY - brd.offsetTop + cursorYOffset);
+		}
+		function newFireworkSeed(x, y)
+		{
+			var fwkSed = document.createElement("DIV");
+			fwkSed.setAttribute('class', 'fireWorkSeed');
+			brd.appendChild(fwkSed);
+			fwkSed.time = fwkSedIniT;
+			fwkSed.velocity = [];
+			fwkSed.velocity.x = 0;
+			fwkSed.velocity.y = fwkSedIniV;
+			fwkSed.position = [];
+			fwkSed.position.x = x;
+			fwkSed.position.y = y;
+			fwkSed.style.left = fwkSed.position.x + 'px';
+			fwkSed.style.top = fwkSed.position.y + 'px';
+			if(seeds == null)
+				seeds = [];
+			seeds.push(fwkSed);
+			return fwkSed;
+		}
+		
+		function newFireWorkStar(x, y)
+		{
+			var fwkBch = document.createElement("DIV");
+			fwkBch.setAttribute('class', 'fireWorkBatch');
+			var a = 0;
+			while(a < 360)
+			{
+				var fwkPtc = newFireworkParticle(x, y, a);
+				fwkBch.appendChild(fwkPtc);
+				a += 5;
+			}
+			brd.appendChild(fwkBch);
+		}
+		var before = Date.now();
+		var id = setInterval(frame, 5);
+		
+		function frame()
+		{
+			var current = Date.now();
+			var deltaTime = current - before;
+			before = current;
+			for(i in seeds)
+			{
+				var fwkSed = seeds[i];
+				fwkSed.time -= deltaTime;
+				if(fwkSed.time > 0)
+				{
+					fwkSed.velocity.x -= fwkSed.velocity.x * a * deltaTime;
+					fwkSed.velocity.y -= g * deltaTime + fwkSed.velocity.y * a * deltaTime;
+					fwkSed.position.x += fwkSed.velocity.x * deltaTime;
+					fwkSed.position.y -= fwkSed.velocity.y * deltaTime;
+					fwkSed.style.left = fwkSed.position.x + 'px';
+					fwkSed.style.top = fwkSed.position.y + 'px';
+				}
+				else
+				{
+					newFireWorkStar(fwkSed.position.x, fwkSed.position.y);
+					fwkSed.parentNode.removeChild(fwkSed);
+					seeds.splice(i, 1);
+				}
+			}
+			for(i in particles)
+			{
+				var fwkPtc = particles[i];
+				fwkPtc.time -= deltaTime;
+				if(fwkPtc.time > 0)
+				{
+					fwkPtc.velocity.x -= fwkPtc.velocity.x * a * deltaTime;
+					fwkPtc.velocity.y -= g * deltaTime + fwkPtc.velocity.y * a * deltaTime;
+					fwkPtc.position.x += fwkPtc.velocity.x * deltaTime;
+					fwkPtc.position.y -= fwkPtc.velocity.y * deltaTime;
+					fwkPtc.style.left = fwkPtc.position.x + 'px';
+					fwkPtc.style.top = fwkPtc.position.y + 'px';
+				}
+				else
+				{
+					fwkPtc.parentNode.removeChild(fwkPtc);
+					particles.splice(i, 1);
+				}
+			}
+		}
+        
+    var loadDate = "";
+    var droplets = 0;
         
     var config = {
         apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
@@ -256,6 +779,9 @@
                 
                 myphotodiv = document.getElementById("myphoto");
                 myphotodiv.innerHTML = "<img src='" + imageUrl + "' style='position:absolute; left: 1300px; top: 72px; width: 75px; height: 75px;'/>";
+                
+                mydropdiv = document.getElementById("mydroplets");
+                document.getElementById("mydroplets").innerHTML = "Droplets: " + droplets;
 
                 firebase.database().ref('/tweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
@@ -304,16 +830,81 @@
                     firebase.database().ref('users/' + userId).set({
                         username: name,
                         email: email,
-                        profile_picture : imageUrl
+                        profile_picture : imageUrl,
+                       
                     }); 
                  }                                      
             });
         }
         
-        
+        function updatetweets(data) {
+            //var mylist = "<ul>";
+            var mytab = "<br><br><br><table>";
+            users = data[1]; // put on top, because changed data - not good coding change later
+            data = data[0];
+            
+            for (var u in data) {
+                for (var t in data[u]) {
+                    mytab = mytab + "<tr>";
+                    //var date = timeSince(new Date(Date.now()));
+                    var date = new Date(data[u][t].time);
+                    var time = date.toString();
+                    if (time.substring(0,15) == loadDate.substring(0,15)) {
+                        if (time.substring(16,18) == loadDate.substring(16,18)) {
+                            var num1 = Number(loadDate.substring(19,21));
+                            var num2 = Number(time.substring(19,21));
+                            console.log(num1);
+                            var num3 = num1 - num2;
+                            time = num3.toString() + " minutes ago";
+                        } else {
+                            var num1 = Number(loadDate.substring(16,18));
+                            var num2 = Number(time.substring(16,18));
+                            var num3 = num1 - num2;
+                            if (num3 == 1) {
+                                var num1 = Number(loadDate.substring(19,21));
+                                var num2 = Number(time.substring(19,21));
+                                console.log(num1);
+                                var num3 = num1 - num2 + 60;
+                                if (num3 > 59) {
+                                    time = "1 hour ago"
+                                } else {
+                                    time = num3.toString() + " minutes ago";
+                                }
+                            } else {
+                                time = num3.toString() + " hours ago";
+                            }
+                        }
+                    } else {
+                        time = time.substring(4,15);
+                    }
+                    //If there is an image posted
+                    if (data[u][t].img != "") {
+                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td>" + users[u].username + "</td>";
+                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td>" + time + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
+                    } else {
+                        mytab = mytab + "<td><img src='" + users[u].profile_picture + "' width='50px'></td>";
+                        mytab = mytab + "<td>" + users[u].username + "</td>";
+                        mytab = mytab + "<td>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td>" + time + "</td>";
+                        
+                        
+                    } 
+                    mytab = mytab + "</tr>";
+                }   
+            }
+            //mylist = mylist + "</ul>";
+            mytab = mytab + "</table>"
+            var mytdiv = document.getElementById("mytweets");
+            //mytdiv.innerHTML = mylist;
+            mytdiv.innerHTML = mytab;
+        }
         
         // write tweets to firebase
         function tweet() {
+            
+            //4-0
             
             loadDate = new Date().toString();
             var twitdoc = document.getElementById("twit");
@@ -349,6 +940,8 @@
         }
         
         var timeSince = function(date) {
+            
+            //4-0
           switch (typeof time) {
             case 'number':
               break;
@@ -423,98 +1016,24 @@
             //name = username;
         }
         
+        function like() {
+            //barca lost
+            alert("You liked Bob's Article! :)");
+            droplets = droplets + 5;
+            mydropdiv = document.getElementById("mydroplets");
+            document.getElementById("mydroplets").innerHTML = "Droplets: " + droplets;
+            
+        }
+    
+        function dislike() {
+            alert("You disliked Bob's Article :(");
+            droplets = droplets - 1;
+            mydropdiv = document.getElementById("mydroplets");
+            document.getElementById("mydroplets").innerHTML = "Droplets: " + droplets;
+        }
+        
     </script>
 
-    <body style="background-color: aliceblue">
-        
-        <div><img src="confetti.png" style="position: absolute; top: 200; left: 100px; width: 1250; height: 550px;"></div>
-
-        <!--Loading spinner-->
-        <div class="center"></div>
-
-        <div class="inner-spin">
-
-          <div class="inner-arc inner-arc_start-a"></div>
-          <div class="inner-arc inner-arc_end-a"></div>
-
-          <div class="inner-arc inner-arc_start-b"></div>
-          <div class="inner-arc inner-arc_end-b"></div>
-
-          <div class="inner-moon-a"></div>
-         <div class="inner-moon-b"></div>
-
-        </div>
-
-        <div class="outer-spin">
-
-          <div class="outer-arc outer-arc_start-a"></div>
-          <div class="outer-arc outer-arc_end-a"></div>
-
-          <div class="outer-arc outer-arc_start-b"></div>
-          <div class="outer-arc outer-arc_end-b"></div>
-
-          <div class="outer-moon-a"></div>
-         <div class="outer-moon-b"></div>
-
-        </div>
-        
-        <div class="topnav">
-          <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
-          <a href="home.html" style="float:left"class="dropbtn"><img src="logo2.png" style="width: 15; height: 20px;"></a> 
-          <a href="soccer.html">Soccer</a>
-          <a href="basketball.html">Basketball</a>
-          <a href="nanotech.html">Nanotech</a>
-          <a href="ar.html">Augmented Reality</a>
-        
-        <div class="dropdown" style="font-family: helvetica; ">
-          <button onclick="myFunction()" class="dropbtn">Find Favorites</button>
-          <div id="myDropdown" class="dropdown-content">
-            <input type="text" placeholder="Search Droplet..." id="myInput" onkeyup="filterFunction()">
-            <a href="soccer.html">Soccer</a>
-            <a href="basketball.html">Basketball</a>
-            <a href="nanotech.html">Nanotech</a>
-            <a href="ar.html">Augmented Reality</a>
-          </div>
-        </div>
-        </div>
-        
-        <div class="profcard">
-          <img src="user.svg" alt="John" style="width:80; height:80;"> <h1 id="namediv"></h1>
-          <p style="color: #B0C4DE" id="myemail">guest1@gmail.com</p>
-          <p>Level: Puddle</p>
-          <p>Droplets: 50</p>
-          <p>Connections: 25</p>
-          <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Helvetica; font-size: 15px;">Log In</button></p>
-          <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Helvetica; font-size: 15px;">Log Out</button></p>
-        </div>
-        
-        <!--<button onclick="logout()">Log Oooout</button>-->
-        
-        <iframe src="song.mp3" allow="autoplay" style="display: none" id="iframeAudio"></iframe>
-        
-        <p style="color: black; position: absolute; top: 200; left: 175px; font-family: Archivo Narrow; font-weight: bold; font-size: 150px;">Welcome to Droplet!</p>
-      
-
-    
-    <div id="mytweets"></div>
-    <div id="mydata"></div>
-    <div id="myphoto"></div>
-        
-    </body>
-    
-    <body>
-    
-    <!--<style>
-        #row:hover {
-            background-color: lightblue;
-            color: white;
-        }
-        
-        #row {
-            background-color: white;
-            color: red;
-        }
-    </style>-->
         
     </body>
  

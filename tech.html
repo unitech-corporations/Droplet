@@ -6,13 +6,14 @@
         <link rel="icon" href = "icon.ico">
         
         <style>
-            tr:hover {
-                background-color: aqua;
-            }
+            
+            tr:hover {background-color: #B0E0E6;}
+            th, td {border-bottom: 1px solid #ddd;}
             
             * {box-sizing: border-box;}
 
             body {
+              background-image: linear-gradient(#87CEFA, #000080);
               margin: 0;
               font-family: Archivo Narrow, Archivo Narrow, Archivo Narrow;
               font-weight: lighter;
@@ -189,6 +190,12 @@
             #myInput:focus {outline: 3px solid #ddd;}
             
             .show {display:block;}
+            
+            .zoom:hover {
+              -ms-transform: scale(1.1); /* IE 9 */
+              -webkit-transform: scale(1.1); /* Safari 3-8 */
+              transform: scale(1.1); 
+            }
 
             
             .drop {
@@ -239,11 +246,11 @@
         </style>
     </head>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
-    //Loader code
+        //Loader code
         var myVar;
         var nbDrop = 800;
    
@@ -277,9 +284,9 @@
           document.getElementById("myDiv").style.display = "block";
         }
         
-    // Initialize Firebase
-    var loadDate = "";
-    var droplets = 0;
+        
+      // Initialize Firebase
+    var loadDate = "";  
         
     var config = {
         apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
@@ -316,10 +323,7 @@
                 document.getElementById("myemail").innerHTML = email;
                 
                 myphotodiv = document.getElementById("myphoto");
-                myphotodiv.innerHTML = "<img src='" + imageUrl + "' style='position: absolute; left: 1300px; top: 72px; width: 75px; height: 75px;'/>";
-                
-                mydropdiv = document.getElementById("mydroplets");
-                document.getElementById("mydroplets").innerHTML = "Droplets: " + droplets;
+                myphotodiv.innerHTML = "<img src='" + imageUrl + "' style='position:absolute; left: 1300px; top: 72px; width: 75px; height: 75px;'/>";
 
                 firebase.database().ref('/tweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
@@ -368,138 +372,12 @@
                     firebase.database().ref('users/' + userId).set({
                         username: name,
                         email: email,
-                        profile_picture : imageUrl,
-                       
+                        profile_picture : imageUrl
                     }); 
                  }                                      
             });
         }
         
-        function updatetweets(data) {
-            //var mylist = "<ul>";
-            var mytab = "<br><br><br><center><table style='background-color: #FEEFFF; width: 875px;'></center>";
-            users = data[1]; // put on top, because changed data - not good coding change later
-            data = data[0];
-            
-            for (var u in data) {
-                for (var t in data[u]) {
-                    mytab = mytab + "<tr>";
-                    //var date = timeSince(new Date(Date.now()));
-                    var date = new Date(data[u][t].time);
-                    var time = date.toString();
-                    if (time.substring(0,15) == loadDate.substring(0,15)) {
-                        if (time.substring(16,18) == loadDate.substring(16,18)) {
-                            var num1 = Number(loadDate.substring(19,21));
-                            var num2 = Number(time.substring(19,21));
-                            console.log(time);
-                            var num3 = num1 - num2;
-                            time = num3.toString() + " minutes ago";
-                        } else {
-                            var num1 = Number(loadDate.substring(16,18));
-                            var num2 = Number(time.substring(16,18));
-                            var num3 = num1 - num2;
-                            if (num3 == 1) {
-                                var num1 = Number(loadDate.substring(19,21));
-                                var num2 = Number(time.substring(19,21));
-                                console.log(num1);
-                                var num3 = num1 - num2 + 60;
-                                if (num3 > 59) {
-                                    time = "1 hour ago"
-                                } 
-                                else {
-                                    time = num3.toString() + " minutes ago";
-                                }
-                            } else {
-                                time = num3.toString() + " hours ago";
-                            }
-                        }
-                    } else {
-                        time = time.substring(4,15);
-                    }
-                    //If there is an image posted
-                    if (data[u][t].img != "") {
-                        
-                        mytab = mytab + "<tr>";
-                        mytab = mytab + "<td rowspan = 3>" + "<img src='" + users[u].profile_picture + "' width='100px'></td>";
-                        mytab = mytab + "<td style='font-family: Archivo Narrow; font-weight: bold; font-size: 25px;'>" + users[u].username + "</td>";
-                        mytab = mytab + "</tr>";
-                        
-                        mytab = mytab + "<td style='color: #87CEFA;'>" + users[u].email + "</td>";
-                        mytab = mytab + "<td style = 'font-family: Archivo Narrow; font-weight: 200; font-size: 20px; text-align: center;'>" + data[u][t].tweet + "</td>";
-                        mytab = mytab + "</tr>";
-                        
-                        mytab = mytab + "<td style='color:#B0C4DE'>" + time + "</td>";
-                        mytab = mytab + "</tr>";
-                        
-                        mytab = mytab + "<tr>";
-                        mytab = mytab + "<td colspan = 3 style = 'text-align:center'>" + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
-                        
-                        mytab = mytab + "<td style='height:25px;'></td>";
-
-                    } else {
-                        
-                        mytab = mytab + "<tr>";
-                        mytab = mytab + "<td rowspan = 3>" + "<img src='" + users[u].profile_picture + "' width='100px'></td>";
-                        mytab = mytab + "<td style='font-family: Archivo Narrow; font-weight: bold; font-size: 25px;'>" + users[u].username + "</td>";
-                        mytab = mytab + "</tr>";
-                        
-                        mytab = mytab + "<td style='color: #87CEFA;'>" + users[u].email + "</td>";
-                        mytab = mytab + "<td style = 'font-family: Archivo Narrow; font-weight: 200; font-size: 20px; text-align: center;'>" + data[u][t].tweet + "</td>";
-                        mytab = mytab + "</tr>";
-                        
-                        mytab = mytab + "<td style='color:#B0C4DE'>" + time + "</td>";
-                        mytab = mytab + "</tr>";
-                        
-                        mytab = mytab + "<td style='height:25px;'></td>";
-                        
-                    } 
-                    mytab = mytab + "</tr>";
-                }   
-            }
-            //mylist = mylist + "</ul>";
-            mytab = mytab + "</table>"
-            var mytdiv = document.getElementById("mytweets");
-            //mytdiv.innerHTML = mylist;
-            mytdiv.innerHTML = mytab;
-        }
-        
-        // write tweets to firebase
-        function tweet() {
-            
-            //4-0
-            
-            loadDate = new Date().toString();
-            var twitdoc = document.getElementById("twit");
-            var twitimg = document.getElementById("imgTest");
-            var nameValue = twitdoc.value;
-            var imgValue = twitimg.innerHTML;
-            var js_time = Date.now();
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time, img: imgValue});
-            twitdoc.value = "";
-            writeUserData(userId, name, email, imageUrl);
-            console.log("tweet written")
-            
-            firebase.database().ref('/tweets').once('value').then(function(snapshot) {
-                    var data = (snapshot.val());
-                    if (data == null) {
-                      console.log("No data found at /tweets/" + userId);  
-                    } else { 
-                        firebase.database().ref('/users').once('value').then(function(snapshot) { 
-                        var userdata = (snapshot.val());
-                        if (userdata != null) {
-                           dataarray = [data,userdata]
-                           console.log(dataarray)
-                           updatetweets(dataarray); 
-                        }
-                      });
-                    }
-                });
-            
-            
-            
-            // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
-            
-        }
         
         
         function login() {
@@ -520,26 +398,10 @@
             console.log("Changing username");
             //name = username;
         }
-        
-        function like() {
-            //barca lost
-            alert("You liked Bob's Article! :)");
-            droplets = droplets + 5;
-            mydropdiv = document.getElementById("mydroplets");
-            document.getElementById("mydroplets").innerHTML = "Droplets: " + droplets;
-            
-        }
-    
-        function dislike() {
-            alert("You disliked Bob's Article :(");
-            droplets = droplets - 1;
-            mydropdiv = document.getElementById("mydroplets");
-            document.getElementById("mydroplets").innerHTML = "Droplets: " + droplets;
-        }
     
     </script>
 
-    <body style="background-color: #000" onload="myFunction()">
+    <body style="background-color: #F5F5F5" onload="myFunction()">
         
         <div id="rain" class="rain"></div>
         <div id="loadertitle">Droplet</div>
@@ -593,57 +455,26 @@
         </div>
         
         <!--<button onclick="logout()">Log Oooout</button>-->
-        
-        
-        <center>
-        <p style="font-family: helvetica; font-size: 50px; font-weight: bold; color: white">Barcelona vs Man Utd: Top 3 Player Ratings</p>
-        <img src="barca.jpg" style="width: 1050; height: 625">
-        <br><br><br>
-        </center>
-        
-        <div style="margin-left: 200px;">
-        <p style="color: white">LIONEL MESSI - 9</p> 
-
-        <p style="color: white">Subdued in the first leg, sublime here. What a first goal. What a show. What a wonderful player.</p><br>
-
-        <p style="color: white">LUIS SUAREZ - 7</p> 
-
-        <p style="color: white">Cut a frustrated figure at times but still did more than enough to keep United busy.</p><br>
-            
-        <p style="color: white">PHILIPPE COUTINHO - 7</p> 
-
-        <p style="color: white">Exploded into life with the kind of stunning strike we are used to seeing from him in the Premier League.</p><br>
-        </div>
-        
-        
-        <center>
-        <button onclick="like()" style="margin-left: 100; position: absolute; left: 450px; top: 1205px; width: 100px; height: 76px; background: url(like.png); font-family: Helvetica; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit"></button>
-        
-        <button onclick="dislike()" style="margin-left: 100; position: absolute; left: 650px; top: 1205px; width: 100px; height: 76px; background: url(dislike.png); font-family: Helvetica; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit"></button>
-        
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <div class="textbox">
-        <form style="color: white">
-            Send a Message!<br><br>
-            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4" style="font-family: Helvetica; font-size: 15px; font-weight: 100;"></textarea>
+        <form class="zoom" action="ai.html">
+            <input style="float: left; margin-left: 150px; margin-top: 50px; background: url(ai2.png); font-family: Helvetica; width: 452px; height: 250px; font-size: 15px; cursor: pointer;" type="submit">
         </form>
-        </div>
         
-        <p align="center">
-        <button type="button" onclick="tweet()" style="align-content: center; font-family: Helvetica; background: #0000CD; color: white;  width: 75px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Send</button>
-        </p>
+        <form class="zoom" action="ar.html">
+            <input style="float: right; margin-right: 150px; margin-top: 50px; background: url(ar2.png); font-family: Helvetica; width: 452px; height: 250px; font-size: 15px; cursor: pointer;" type="submit">
+        </form>
         
-
-        <br><input class="textb" id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="position: absolute; left: 680px;"/>
-        <div id="imgTest" style="display:none;"></div>
-        </center>
+        <form class="zoom" action="nanotech.html">
+            <input  type="submit" style="float: left; margin-left: 150px; margin-top: 100px; background: url(nano2.png); font-family: Helvetica; width: 452px; height: 250px; font-family: Helvetica; font-size: 15px; cursor: pointer;">
+        </form>
         
+        <form class="zoom" action="gaming.html">
+            <input  type="submit" style="float: right; margin-right: 150px; margin-top: 100px; background: url(gaming2.png); font-family: Helvetica; width: 452px; height: 250px; font-family: Helvetica; font-size: 15px; cursor: pointer;">
+        </form>
 
     
     <div id="mytweets"></div>
     <div id="mydata"></div>
     <div id="myphoto"></div>
-    <div id="mydroplets"></div>
         </div>
         
     </body>
