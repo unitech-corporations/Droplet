@@ -195,6 +195,18 @@
                   from{ bottom:-100px; opacity:0 } 
                   to{ bottom:0; opacity:1 }
                 }
+          
+          #localVideo {
+          position: absolute;
+          top: 200px;
+          left: 3.1%;
+      }
+      
+        #remoteVideo {
+          position: absolute;
+          top: 19%;
+          left: 50%;
+      }
 
     </style>
     </head>
@@ -253,8 +265,8 @@
                
       <p style = "color: black; position: absolute; left: 150px; top: 0px; font-family: Archivo Narrow; font-weight: bolder; font-size: 75px;">Send the URL above to a friend to</p>
       <p style = "color: #87CEFA; position: absolute; left: 1097px; top: 0px; font-family: Archivo Narrow; font-weight: bolder; font-size: 75px;">chat</p>
-      <video id="localVideo" width = "400" height = "294" style = "background-image: url(vid1-1.png); position: absolute; left: 150px; top: 175px;" autoplay muted><img></video>
-      <video id="remoteVideo" width = "400" height = "294" style = "background-image: url(vid2-2.png); position: absolute; left: 800px; top: 175px;" autoplay></video>
+      <video id="localVideo" autoplay muted></video>
+      <video id="remoteVideo" autoplay></video>
       <!--<video id="remoteVideo" width = "400" height = "294" style = "background-image: url(vid2-2.png); position: absolute; left: 150px; top: 510px;" autoplay></video>
       <video id="remoteVideo" width = "400" height = "294" style = "background-image: url(vid2-2.png); position: absolute; left: 800px; top: 510px;" autoplay></video>-->
     
@@ -296,6 +308,6 @@
           document.getElementById("myDiv").style.display = "block";
         }
         </script>
-      <script src="vidchat.js"></script>
+        <script src="vidchat.js"></script>
     </body>
 </html>
