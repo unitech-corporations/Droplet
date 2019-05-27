@@ -377,13 +377,18 @@
             });
         }
         
-        //var count = 0;
+        
         
         function updatetweets(data) {
             //var mylist = "<ul>";
             var mytab = "<br><br><br><center><table style='background-color: #FEEFFF; width: 875px;'></center>";
             users = data[1]; // put on top, because changed data - not good coding change later
             data = data[0];
+            
+            
+            var count = 0;
+            var tKey = "";
+            tKey = data[u][t].key;
             
             //var array = Object.keys(data[u]);
              
@@ -452,7 +457,7 @@
                         
                         mytab = mytab + "<td style='color: #87CEFA;'>" + users[u].email + "</td>";
                         mytab = mytab + "<td style = 'font-family: Archivo Narrow; font-weight: 200; font-size: 20px; text-align: center;'>" + data[u][t].tweet + "</td>";
-                        /*mytab = mytab + "<td><button id= likes " + count + " onclick='commentLike(`" + count + "`,`" + array + "`,`" + users[u].userId + "`)'><img src='like2.png' style='width: 35; height: 35;'></button></td>";*/
+                        mytab = mytab + "<td><button id= likes " + count + " onclick='commentLike(`" + count + "`,`" + tKey + "`,`" + users[u].userId + "`)'><img src='like2.png' style='width: 35; height: 35;'></button></td>";
                         mytab = mytab + "</tr>";
                         
                         mytab = mytab + "<td style='color:#B0C4DE'>" + time + "</td>";
@@ -471,7 +476,7 @@
             var mytdiv = document.getElementById("mytweets");
             //mytdiv.innerHTML = mylist;
             mytdiv.innerHTML = mytab;
-            //count ++;
+            count ++;
         }
         
         // write tweets to firebase
