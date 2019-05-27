@@ -190,6 +190,12 @@
             #myInput:focus {outline: 3px solid #ddd;}
             
             .show {display:block;}
+            
+            .zoom:hover {
+              -ms-transform: scale(1.2); /* IE 9 */
+              -webkit-transform: scale(1.2); /* Safari 3-8 */
+              transform: scale(1.2); 
+            }
 
             
             .drop {
@@ -237,15 +243,80 @@
               to{ bottom:0; opacity:1 }
             }
             
+            
+            
         </style>
     </head>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+    <body onload="myFunction()">
+        
+        <div id="rain" class="rain"></div>
+        <div id="loadertitle">Droplet</div>
+        
+        <div style="display:none;" id="myDiv" class="animate-bottom">
+            <div class="topnav">
+          <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
+          <a href="home.html" class="dropbtn"><img src="logo2.png" style="width: 17; height: 23px;"></a> 
+          
+        <div class="dropdown" style="font-family: helvetica; ">
+          <button onclick="myFunction()" class="dropbtn">Topics</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="sports.html">Sports</a>
+            <a href="tech.html">Tech</a>
+            <a href="politics.html">Politics</a>
+            <a href="finance.html">Finance</a>
+          </div>
+        </div>
+            
+        <a href="vidchat.html" class="dropbtn" style="font-family: Archivo Narrow;">Video Chat</a>
+                        
+        <a href="games.html" class="dropbtn" style="font-family: Archivo Narrow;">Games</a>
+            
+        <a href="suggestions.html" class="dropbtn" style="font-family: Archivo Narrow;">Suggestions</a>
+            
+        <a href="aboutus.html" class="dropbtn" style="font-family: Archivo Narrow;">About Us</a>
+            
+        <a href="faq.html" class="dropbtn" style="font-family: Archivo Narrow;">FAQ</a>
+            
+        <div class="dropdown" style="font-family: helvetica; float: right;">
+          <button onclick="myFunction()" class="dropbtn"><img id="myphoto" src="logo2.png" style="width: 15; height: 20px;"></button>
+            <div id="myDropdown" class="dropdown-content" style="position: absolute; left: 1140px; width: 300px; text-align: center;">
+            <h1 style="color: #000;" id="namediv">User</h1>
+            <a style="color: #B0C4DE; text-align: center;" id="myemail">guest1@gmail.com</a>
+            <a id="mylevel" style="text-align: center;">Level: Puddle</a>
+            <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log In</button></p>
+            <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log Out</button></p>
+              </div>
+        </div>
+            
+        </div>
+        
+        
+        <!--<button onclick="logout()">Log Oooout</button>-->
+        <center>
+        <form class="zoom" action="flappy.html">
+            <input style="margin-top: 40px; background: url(flappy.png); font-family: Helvetica; width: 452px; height: 326px; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit">
+        </form>
+        </center><br><br>
+        
+        <form class="zoom" action="pong.html">
+            <input type="submit" style="float: left; margin-left: 150px; margin-top: 20px; background: url(pong1.png); font-family: Helvetica; width: 452px; height: 273px; font-family: Helvetica; font-size: 15px; cursor: pointer;">
+        </form>
+        
+        <form class="zoom" action="mega.html">
+            <input type="submit" style="float: right; margin-right: 150px; background: url(mega.png); font-family: Helvetica; width: 452px; height: 273px; font-family: Helvetica; font-size: 15px; cursor: pointer;">
+        </form>
+
+    
+    <div id="mytweets"></div>
+    <div id="mydata"></div>
+    <div id="myphoto"></div>
+            
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
-        
-        //Loader code
+    //Loader code
         var myVar;
         var nbDrop = 800;
    
@@ -278,6 +349,7 @@
           document.getElementById("loadertitle").style.display = "none";
           document.getElementById("myDiv").style.display = "block";
         }
+        
         
       // Initialize Firebase
     var loadDate = "";  
@@ -394,63 +466,6 @@
         }
     
     </script>
-
-    <body onload="myFunction()">
-        
-        <div id="rain" class="rain"></div>
-        <div id="loadertitle">Droplet</div>
-        
-        <div style="display:none;" id="myDiv" class="animate-bottom">
-        
-         <div class="topnav">
-          <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
-          <a href="home.html" class="dropbtn"><img src="logo2.png" style="width: 17; height: 23px;"></a> 
-          
-        <div class="dropdown" style="font-family: helvetica; ">
-          <button onclick="myFunction()" class="dropbtn">Topics</button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="sports.html">Sports</a>
-            <a href="tech.html">Tech</a>
-            <a href="politics.html">Politics</a>
-            <a href="finance.html">Finance</a>
-          </div>
-        </div>
-            
-        <a href="vidchat.html" class="dropbtn" style="font-family: Archivo Narrow;">Video Chat</a>
-                        
-        <a href="games.html" class="dropbtn" style="font-family: Archivo Narrow;">Games</a>
-            
-        <a href="suggestions.html" class="dropbtn" style="font-family: Archivo Narrow;">Suggestions</a>
-            
-        <a href="aboutus.html" class="dropbtn" style="font-family: Archivo Narrow;">About Us</a>
-            
-        <a href="faq.html" class="dropbtn" style="font-family: Archivo Narrow;">FAQ</a>
-            
-        <div class="dropdown" style="font-family: helvetica; float: right;">
-          <button onclick="myFunction()" class="dropbtn"><img id="myphoto" src="logo2.png" style="width: 15; height: 20px;"></button>
-            <div id="myDropdown" class="dropdown-content" style="position: absolute; left: 1140px; width: 300px; text-align: center;">
-            <h1 style="color: #000;" id="namediv">User</h1>
-            <a style="color: #B0C4DE; text-align: center;" id="myemail">guest1@gmail.com</a>
-            <a id="mylevel" style="text-align: center;">Level: Puddle</a>
-            <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log In</button></p>
-            <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log Out</button></p>
-              </div>
-        </div>
-            
-        </div>
-        
-        <!--<button onclick="logout()">Log Oooout</button>-->
-        <center>
-        <form action="harticle.html">
-            <input style="margin-top: 50px; background: url(leafs.png); font-family: Helvetica; width: 725px; height: 490px; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit">
-        </form>
-        </center>
-
-    
-    <div id="mytweets"></div>
-    <div id="mydata"></div>
-    <div id="myphoto"></div>
-        
     </div>
         
     </body>

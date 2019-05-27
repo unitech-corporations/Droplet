@@ -215,8 +215,12 @@
               border-radius: 0 3px 3px 0;
               user-select: none;
             }
-
-            /* Position the "next button" to the right */
+            
+            .prev {
+              left: 0;
+              border-radius: 3px 0 0 3px;
+            }
+            
             .next {
               right: 0;
               border-radius: 3px 0 0 3px;
@@ -400,11 +404,45 @@
               from{ bottom:-100px; opacity:0 } 
               to{ bottom:0; opacity:1 }
             }
+            
+            #biopage {
+                display: none;
+                position: absolute;
+                left: 50px;
+                width: 1325px;
+                height: 800px;
+                background-color: black;
+                color: white;
+            }
+            
+            body.dark-mode {
+              background-color: black;
+              color: white;
+            }
+            p.dark-mode {
+              color: white;
+            }
+            body.dark-mode button {
+              background-color: white;
+              color: black;
+            }
+
+            body.light-mode {
+              background-color: #F5F5F5;
+              color: black;
+            }
+            p.light-mode {
+              color: black;
+            }
+            body.light-mode button {
+              background-color: black;
+              color: white;
+            }
 
         </style>
     </head>
 
-    <body style="background-color: #F5F5F5" onload="myFunction()">
+    <body id="body" class="light-mode" onload="myFunction()">
         
         <div id="rain" class="rain"></div>
         <div id="loadertitle">Droplet</div>
@@ -416,7 +454,7 @@
               <a href="home.html" class="dropbtn"><img src="logo2.png" style="width: 17; height: 23px;"></a> 
 
             <div class="dropdown" style="font-family: helvetica; ">
-              <button onclick="myFunction()" class="dropbtn">Topics</button>
+              <button onclick="myFunction()" class="dropbtn" style="color: black;">Topics</button>
               <div id="myDropdown" class="dropdown-content">
                 <a href="sports.html">Sports</a>
                 <a href="tech.html">Tech</a>
@@ -426,17 +464,8 @@
             </div>
 
             <a href="vidchat.html" class="dropbtn" style="font-family: Archivo Narrow;">Video Chat</a>
-
-            <a href="connections.html" class="dropbtn" style="font-family: Archivo Narrow;">Connections</a>
-
-            <div class="dropdown" style="font-family: helvetica; ">
-              <button onclick="myFunction()" class="dropbtn">Games</button>
-              <div id="myDropdown" class="dropdown-content">
-                <a href="soccer.html">???</a>
-                <a href="basketball.html">???</a>
-                <a href="hockey.html">???</a>
-              </div>
-            </div>
+                
+            <a href="games.html" class="dropbtn" style="font-family: Archivo Narrow;">Games</a>
 
             <a href="suggestions.html" class="dropbtn" style="font-family: Archivo Narrow;">Suggestions</a>
 
@@ -445,23 +474,27 @@
             <a href="faq.html" class="dropbtn" style="font-family: Archivo Narrow;">FAQ</a>
 
             <div class="dropdown" style="font-family: helvetica; float: right;">
-              <button onclick="myFunction()" class="dropbtn"><img id="myphoto" src="logo2.png" style="width: 15; height: 20px;"></button>
+              <button onclick="myFunction()" class="dropbtn"><img id="myphoto" style="width: 15; height: 20px;"></button>
                 <div id="myDropdown" class="dropdown-content" style="position: absolute; left: 1140px; width: 300px; text-align: center;">
                 <h1 style="color: #000;" id="namediv">User</h1>
                 <a style="color: #B0C4DE; text-align: center;" id="myemail">guest1@gmail.com</a>
                 <a id="mylevel" style="text-align: center;">Level: Puddle</a>
-                <a id="mydroplets" style="text-align: center;">Connections: 1</a>
-                <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log In</button></p>
-                <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log Out</button></p>
-                  </div>
+                <a id="mydroplets" style="text-align: center;">Droplets: 15</a>
+                <p><button onclick="login()" style="float: left; margin-left: 50px; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log In</button></p>
+                <p><button onclick="logout()" style="float: right; margin-right: 50px; margin-bottom: 10px; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log Out</button></p>
+                </div>
             </div>
 
             </div>
 
-            <div id = "board"></div>
+            <div id="board"></div>
 
 
-            <div><p style="color: black; position: absolute; top: -40; left: 350px; font-family: Archivo Narrow; font-weight: bold; font-size: 100px;">Welcome to </p><p style="color: #87CEFA; position: absolute; top: -40; left: 810px; font-family: Archivo Narrow; font-weight: bold; font-size: 100px;">Droplet!</p></div><br><br><br><br><br><br><br><br><br><br><br>
+            <div><p style="position: absolute; top: -40; left: 350px; font-family: Archivo Narrow; font-weight: bold; font-size: 100px;">Welcome to Droplet!</p><p style="color: #87CEFA; position: absolute; top: -40; left: 810px; font-family: Archivo Narrow; font-weight: bold; font-size: 100px;">Droplet!</p></div><br><br>
+            <!--<div><p style="color: black; position: absolute; top: 150; left: 650px; font-family: Archivo Narrow; font-weight: bold; font-size: 30px;">(Dark Mode?)</p></div>-->
+            <button type="button" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode" style="position: absolute; top: 175; left: 650px; font-family: Archivo Narrow; font-size: 30px;">(Dark Mode?)</button>
+            <br><br><br><br><br><br><br><br><br>
+            
 
             <div class="slideshow-container">
 
@@ -547,7 +580,17 @@
         
         //Search filter
         function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+        
+        function bioinfo() {
+            document.getElementById("biopage").classList.toggle("show");
+        }
+        
+        function toggleDarkLight() {
+          var body = document.getElementById("body");
+          var currentClass = body.className;
+          body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
         }
 
         function filterFunction() {
@@ -600,6 +643,7 @@
           document.getElementById("myDiv").style.display = "block";
         }
         
+        /*//Fireworks
         var brd = document.createElement("DIV");
 		document.body.insertBefore(brd, document.getElementById("board"));
 		seeds = [];
@@ -738,7 +782,7 @@
 					particles.splice(i, 1);
 				}
 			}
-		}
+		}*/
         
     var loadDate = "";
     var droplets = 0;
@@ -938,62 +982,6 @@
             // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
             
         }
-        
-        var timeSince = function(date) {
-            
-            //4-0
-          switch (typeof time) {
-            case 'number':
-              break;
-            case 'string':
-              time = +new Date(time);
-              break;
-            case 'object':
-              if (time.constructor === Date) time = time.getTime();
-              break;
-            default:
-              time = +new Date();
-          }
-          var time_formats = [
-            [60, 'seconds', 1], // 60
-            [120, '1 minute ago', '1 minute from now'], // 60*2
-            [3600, 'minutes', 60], // 60*60, 60
-            [7200, '1 hour ago', '1 hour from now'], // 60*60*2
-            [86400, 'hours', 3600], // 60*60*24, 60*60
-            [172800, 'Yesterday', 'Tomorrow'], // 60*60*24*2
-            [604800, 'days', 86400], // 60*60*24*7, 60*60*24
-            [1209600, 'Last week', 'Next week'], // 60*60*24*7*4*2
-            [2419200, 'weeks', 604800], // 60*60*24*7*4, 60*60*24*7
-            [4838400, 'Last month', 'Next month'], // 60*60*24*7*4*2
-            [29030400, 'months', 2419200], // 60*60*24*7*4*12, 60*60*24*7*4
-            [58060800, 'Last year', 'Next year'], // 60*60*24*7*4*12*2
-            [2903040000, 'years', 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
-            [5806080000, 'Last century', 'Next century'], // 60*60*24*7*4*12*100*2
-            [58060800000, 'centuries', 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
-          ];
-          var seconds = (+new Date() - time) / 1000,
-            token = 'ago',
-            list_choice = 1;
-
-          if (seconds == 0) {
-            return 'Just now'
-          }
-          if (seconds < 0) {
-            seconds = Math.abs(seconds);
-            token = 'from now';
-            list_choice = 2;
-          }
-          var i = 0,
-            format;
-          while (format = time_formats[i++])
-            if (seconds < format[0]) {
-              if (typeof format[2] == 'string')
-                return format[list_choice];
-              else
-                return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
-            }
-          return time;
-        };
         
         
         

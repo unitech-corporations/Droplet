@@ -191,27 +191,104 @@
             .show {display:block;}
 
             
-            /*.textb {
-                background-color: #0000CD;
-            }*/
+            .drop {
+                background: #87CEEB;
+                width: 1px;
+                height: 89px;
+                position: absolute;
+                bottom: 200px;
+                -webkit-animation: fall .63s linear infinite;
+                -moz-animation: fall .63s linear infinite;
+               }
+            
+            #loadertitle {
+                color: #87CEEB;
+                font-family: Archivo Narrow;
+                font-size: 200px;
+                text-align: center;
+                margin-top: 250px;
+            }
+
+               @-webkit-keyframes fall { to {margin-top: 900px;}}
+               @-moz-keyframes fall { to {margin-top: 900px;}}
+
+            #myDiv {
+              display: none;
+              text-align: center;
+            }
+            
+            /* Add animation to "page content" */
+            .animate-bottom {
+              position: relative;
+              -webkit-animation-name: animatebottom;
+              -webkit-animation-duration: 1s;
+              animation-name: animatebottom;
+              animation-duration: 1s
+            }
+
+            @-webkit-keyframes animatebottom {
+              from { bottom:-100px; opacity:0 } 
+              to { bottom:0px; opacity:1 }
+            }
+
+            @keyframes animatebottom { 
+              from{ bottom:-100px; opacity:0 } 
+              to{ bottom:0; opacity:1 }
+            }
             
         </style>
     </head>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
+        
+        //Loader code
+        var myVar;
+        var nbDrop = 800;
+   
+           function randRange(maxNum, minNum) {
+            return (Math.floor(Math.random(10) * (maxNum - minNum + 1)) + minNum);
+           }
+
+           function createRain() {
+            for (i = 0; i < nbDrop; i++) {
+
+             var dropLeft = randRange(0, 3000);
+             var dropTop = randRange(-1000, 1000);
+             $('.rain').append('<div class="drop" id="drop'+ i +'"></div>');
+             $('#drop' + i).css('left', dropLeft);
+             $('#drop' + i).css('top', dropTop); 
+            }
+           }
+
+        function stuff() {
+          myVar = setTimeout(showPage, 3000);
+        }
+        
+        function myFunction() {
+            createRain();
+            stuff();
+        }
+
+        function showPage() {
+          document.getElementById("rain").style.display = "none";
+          document.getElementById("loadertitle").style.display = "none";
+          document.getElementById("myDiv").style.display = "block";
+        }
+        
       // Initialize Firebase
     var loadDate = "";  
         
     var config = {
-    apiKey: "AIzaSyDu1lxVAxOAX_6FnI6E7GR-EJJAAmR-RYU",
-    authDomain: "augmented-reality-5e9c8.firebaseapp.com",
-    databaseURL: "https://augmented-reality-5e9c8.firebaseio.com",
-    projectId: "augmented-reality-5e9c8",
-    storageBucket: "augmented-reality-5e9c8.appspot.com",
-    messagingSenderId: "821949643031"
-  };
+        apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
+        authDomain: "droplet-34330.firebaseapp.com",
+        databaseURL: "https://droplet-34330.firebaseio.com",
+        projectId: "droplet-34330",
+        storageBucket: "droplet-34330.appspot.com",
+        messagingSenderId: "822727269402"
+      };
   firebase.initializeApp(config);
                 
         // Check to see if you are logged in
@@ -241,10 +318,10 @@
                 myphotodiv = document.getElementById("myphoto");
                 myphotodiv.innerHTML = "<img src='" + imageUrl + "' style='position:absolute; left: 1300px; top: 72px; width: 75px; height: 75px;'/>";
 
-                firebase.database().ref('/tweets').once('value').then(function(snapshot) {
+                firebase.database().ref('/trudeautweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
-                      console.log("No data found at /tweets/" + userId);  
+                      console.log("No data found at /trudeautweets/" + userId);  
                     } else {
                         
                       firebase.database().ref('/users').once('value').then(function(snapshot) { 
@@ -392,15 +469,15 @@
             var nameValue = twitdoc.value;
             var imgValue = twitimg.innerHTML;
             var js_time = Date.now();
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time, img: imgValue});
+            var tweetid = firebase.database().ref('trudeautweets/' + userId + "/").push({tweet: nameValue, time: js_time, img: imgValue});
             twitdoc.value = "";
             writeUserData(userId, name, email, imageUrl);
             console.log("tweet written")
             
-            firebase.database().ref('/tweets').once('value').then(function(snapshot) {
+            firebase.database().ref('/trudeautweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
-                      console.log("No data found at /tweets/" + userId);  
+                      console.log("No data found at /trudeautweets/" + userId);  
                     } else { 
                         firebase.database().ref('/users').once('value').then(function(snapshot) { 
                         var userdata = (snapshot.val());
@@ -418,62 +495,6 @@
             // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
             
         }
-        
-        var timeSince = function(date) {
-          switch (typeof time) {
-            case 'number':
-              break;
-            case 'string':
-              time = +new Date(time);
-              break;
-            case 'object':
-              if (time.constructor === Date) time = time.getTime();
-              break;
-            default:
-              time = +new Date();
-          }
-          var time_formats = [
-            [60, 'seconds', 1], // 60
-            [120, '1 minute ago', '1 minute from now'], // 60*2
-            [3600, 'minutes', 60], // 60*60, 60
-            [7200, '1 hour ago', '1 hour from now'], // 60*60*2
-            [86400, 'hours', 3600], // 60*60*24, 60*60
-            [172800, 'Yesterday', 'Tomorrow'], // 60*60*24*2
-            [604800, 'days', 86400], // 60*60*24*7, 60*60*24
-            [1209600, 'Last week', 'Next week'], // 60*60*24*7*4*2
-            [2419200, 'weeks', 604800], // 60*60*24*7*4, 60*60*24*7
-            [4838400, 'Last month', 'Next month'], // 60*60*24*7*4*2
-            [29030400, 'months', 2419200], // 60*60*24*7*4*12, 60*60*24*7*4
-            [58060800, 'Last year', 'Next year'], // 60*60*24*7*4*12*2
-            [2903040000, 'years', 29030400], // 60*60*24*7*4*12*100, 60*60*24*7*4*12
-            [5806080000, 'Last century', 'Next century'], // 60*60*24*7*4*12*100*2
-            [58060800000, 'centuries', 2903040000] // 60*60*24*7*4*12*100*20, 60*60*24*7*4*12*100
-          ];
-          var seconds = (+new Date() - time) / 1000,
-            token = 'ago',
-            list_choice = 1;
-
-          if (seconds == 0) {
-            return 'Just now'
-          }
-          if (seconds < 0) {
-            seconds = Math.abs(seconds);
-            token = 'from now';
-            list_choice = 2;
-          }
-          var i = 0,
-            format;
-          while (format = time_formats[i++])
-            if (seconds < format[0]) {
-              if (typeof format[2] == 'string')
-                return format[list_choice];
-              else
-                return Math.floor(seconds / format[2]) + ' ' + format[1] + ' ' + token;
-            }
-          return time;
-        };
-        
-        
         
         function login() {
             console.log("Logging in");
@@ -496,36 +517,12 @@
     
     </script>
 
-    <body style="background-color: black">
+    <body style="background-color: black" onload="myFunction()">
         
-        <!--Loading spinner-->
-        <div class="center"></div>
-
-        <div class="inner-spin">
-
-          <div class="inner-arc inner-arc_start-a"></div>
-          <div class="inner-arc inner-arc_end-a"></div>
-
-          <div class="inner-arc inner-arc_start-b"></div>
-          <div class="inner-arc inner-arc_end-b"></div>
-
-          <div class="inner-moon-a"></div>
-         <div class="inner-moon-b"></div>
-
-        </div>
-
-        <div class="outer-spin">
-
-          <div class="outer-arc outer-arc_start-a"></div>
-          <div class="outer-arc outer-arc_end-a"></div>
-
-          <div class="outer-arc outer-arc_start-b"></div>
-          <div class="outer-arc outer-arc_end-b"></div>
-
-          <div class="outer-moon-a"></div>
-         <div class="outer-moon-b"></div>
-
-        </div>
+        <div id="rain" class="rain"></div>
+        <div id="loadertitle">Droplet</div>
+        
+        <div style="display:none;" id="myDiv" class="animate-bottom">
         
         <div class="topnav">
           <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
@@ -542,17 +539,8 @@
         </div>
             
         <a href="vidchat.html" class="dropbtn" style="font-family: Archivo Narrow;">Video Chat</a>
-            
-        <a href="connections.html" class="dropbtn" style="font-family: Archivo Narrow;">Connections</a>
-            
-        <div class="dropdown" style="font-family: helvetica; ">
-          <button onclick="myFunction()" class="dropbtn">Games</button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="soccer.html">???</a>
-            <a href="basketball.html">???</a>
-            <a href="hockey.html">???</a>
-          </div>
-        </div>
+                        
+        <a href="games.html" class="dropbtn" style="font-family: Archivo Narrow;">Games</a>
             
         <a href="suggestions.html" class="dropbtn" style="font-family: Archivo Narrow;">Suggestions</a>
             
@@ -566,7 +554,6 @@
             <h1 style="color: #000;" id="namediv">User</h1>
             <a style="color: #B0C4DE; text-align: center;" id="myemail">guest1@gmail.com</a>
             <a id="mylevel" style="text-align: center;">Level: Puddle</a>
-            <a id="mydroplets" style="text-align: center;">Connections: 1</a>
             <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log In</button></p>
             <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log Out</button></p>
               </div>
@@ -598,12 +585,12 @@
         <div class="textbox">
         <form style="color: white">
             Send a Message!<br><br>
-            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4" style="font-family: Helvetica; font-size: 15px; font-weight: 100;"></textarea>
+            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4" style="font-family: Archivo Narrow; font-size: 15px; font-weight: 100;"></textarea>
         </form>
         </div>
         
         <p align="center">
-        <button type="button" onclick="tweet()" style="align-content: center; font-family: Helvetica; background: #0000CD; color: white;  width: 75px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Send</button>
+        <button type="button" onclick="tweet()" style="align-content: center; background: #0000CD; color: white;  width: 75px; height: 40px; font-family: Archivo Narrow; font-size: 15px; cursor: pointer;">Send</button>
         </p>
         
 
@@ -616,21 +603,7 @@
     <div id="mydata"></div>
     <div id="myphoto"></div>
         
-    </body>
-    
-    <body>
-    
-    <!--<style>
-        #row:hover {
-            background-color: lightblue;
-            color: white;
-        }
-        
-        #row {
-            background-color: white;
-            color: red;
-        }
-    </style>-->
+    </div>
         
     </body>
  

@@ -1,0 +1,1221 @@
+   <html>
+       
+    <title>Droplet</title>   
+
+       <head>
+        <meta charset="utf-8" />
+        <link rel="icon" href = "icon.ico">
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+          <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet'>
+          <link href='https://fonts.googleapis.com/css?family=Permanent Marker' rel='stylesheet'>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+               </head>
+        
+        <style>
+            
+             tr:hover {background-color: #B0E0E6;}
+            th, td {border-bottom: 1px solid #ddd;}
+            
+            * {box-sizing: border-box;}
+
+            body {
+              margin: 0;
+              font-family: Archivo Narrow, Archivo Narrow, Archivo Narrow;
+              font-weight: lighter;
+            }
+
+            .topnav {
+              overflow: hidden;
+              background-color: white;
+            }
+
+            .topnav a {
+              float: left;
+              display: block;
+              color: black;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+              font-size: 20px;
+              font-family: Archivo Narrow;
+              font-weight: lighter;
+            }
+
+            .topnav a:hover, .dropdown:hover, .dropbtn:hover {
+              background-color: #87CEFA;
+              color: white;
+            }
+            
+            .dropbtn {
+              background-color: transparent;
+              color: black;
+              text-align: center;
+              padding: 14px 16px;
+              text-decoration: none;
+              font-size: 20px;
+              font-family: Archivo Narrow;
+              font-weight: lighter;
+            }
+
+            .topnav a.active {
+              background-color: #0000CD;
+              color: white;
+            }
+
+            .topnav .search-container {
+              float: right;
+            }
+
+            .topnav input[type=text] {
+              padding: 6px;
+              margin-top: 8px;
+              font-size: 17px;
+              border: none;
+            }
+
+            .topnav .search-container button {
+              float: right;
+              padding: 6px 10px;
+              margin-top: 8px;
+              margin-right: 16px;
+              background: #ddd;
+              font-size: 20px;
+              font-family: Archivo Narrow;
+              font-weight: lighter;
+              border: none;
+              cursor: pointer;
+            }
+
+            .topnav .search-container button:hover {
+              background: #ccc;
+            }
+            
+            .dropdown {
+              float: left;
+              overflow: hidden;
+            }
+            
+            .dropdown .dropbtn {
+              font-size: 16px;  
+              border: none;
+              outline: none;
+              padding: 14px 16px;
+              background-color: inherit;
+              font-size: 20px;
+              font-family: Archivo Narrow;
+              font-weight: lighter;
+              margin: 0;
+            }
+            
+            .dropbtn2 {
+              font-size: 16px;  
+              border: none;
+              outline: none;
+              padding: 14px 16px;
+              font-family: Archivo Narrow;
+              margin: 0;
+            }
+            
+            .dropdown-content {
+              display: none;
+              position: absolute;
+              background-color: #f9f9f9;
+              min-width: 160px;
+              box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+              z-index: 1;
+            }
+            
+            .dropdown-content a {
+              float: none;
+              color: black;
+              padding: 12px 16px;
+              text-decoration: none;
+              display: block;
+              text-align: left;
+            }
+            
+            .dropdown-content a:hover {
+              background-color: #ddd;
+            }
+
+            .dropdown:hover .dropdown-content {
+              display: block;
+            }
+
+            @media screen and (max-width: 600px) {
+              .topnav .search-container {
+                float: none;
+              }
+              .topnav a, .topnav input[type=text], .topnav .search-container button {
+                float: none;
+                display: block;
+                text-align: left;
+                width: 100%;
+                margin: 0;
+                padding: 14px;
+              }
+              .topnav input[type=text] {
+                border: 1px solid #ccc;  
+              }
+            }
+            
+            .profcard {
+              float: right;
+              box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+              /*max-width: 300px;*/
+              margin: auto;
+              text-align: center;
+              font-family: Helvetica;
+              padding-left: 30px;
+              padding-right: 30px;
+              padding-top: 10px;
+              padding-bottom: 10px;
+              line-height: 0.5;
+              background-color: white;
+            }
+            
+            div.textbox {
+                display: flex;
+                justify-content: center;
+            }
+            
+            /* The search field */
+            #myInput {
+              border-box: box-sizing;
+              background-image: url('searchicon.png');
+              background-position: 14px 12px;
+              background-repeat: no-repeat;
+              font-size: 16px;
+              padding: 14px 20px 12px 45px;
+              border: none;
+              border-bottom: 1px solid #ddd;
+            }
+
+            /* The search field when it gets focus/clicked on */
+            #myInput:focus {outline: 3px solid #ddd;}
+            
+            .show {display:block;}
+
+            #CTX {
+                position: relative;
+                top: 0px;
+                left: 0px;
+            }
+
+            #Game {
+                width: 402px;
+                border: 1px solid white;
+                margin: 0 auto;
+            }
+
+            #Settings {
+                padding: 10px;
+                padding-top: 0px;
+            }
+            
+            .drop {
+                background: #87CEEB;
+                width: 1px;
+                height: 89px;
+                position: absolute;
+                bottom: 200px;
+                -webkit-animation: fall .63s linear infinite;
+                -moz-animation: fall .63s linear infinite;
+               }
+            
+            #loadertitle {
+                color: #87CEEB;
+                font-family: Archivo Narrow;
+                font-size: 200px;
+                text-align: center;
+                margin-top: 250px;
+            }
+
+               @-webkit-keyframes fall { to {margin-top: 900px;}}
+               @-moz-keyframes fall { to {margin-top: 900px;}}
+
+            #myDiv {
+              display: none;
+              text-align: center;
+            }
+            
+            /* Add animation to "page content" */
+            .animate-bottom {
+              position: relative;
+              -webkit-animation-name: animatebottom;
+              -webkit-animation-duration: 1s;
+              animation-name: animatebottom;
+              animation-duration: 1s
+            }
+
+            @-webkit-keyframes animatebottom {
+              from { bottom:-100px; opacity:0 } 
+              to { bottom:0px; opacity:1 }
+            }
+
+            @keyframes animatebottom { 
+              from{ bottom:-100px; opacity:0 } 
+              to{ bottom:0; opacity:1 }
+            }
+            
+            body.dark-mode {
+              background-color: black;
+              color: white;
+            }
+            p.dark-mode {
+              color: white;
+            }
+            body.dark-mode button {
+              background-color: white;
+              color: black;
+            }
+
+            body.light-mode {
+              background-color: #F5F5F5;
+              color: black;
+            }
+            p.light-mode {
+              color: black;
+            }
+            body.light-mode button {
+              background-color: black;
+              color: white;
+            }
+            
+        </style>
+       
+    <body onload="myFunction()" id="body" class="dark-mode">
+        
+        <div id="rain" class="rain"></div>
+        <div id="loadertitle">Droplet</div>
+        
+        <div style="display:none;" id="myDiv" class="animate-bottom">
+
+        
+        <div class="topnav">
+          <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
+          <a href="home.html" class="dropbtn"><img src="logo2.png" style="width: 17; height: 23px;"></a> 
+          
+        <div class="dropdown" style="font-family: helvetica; ">
+          <button onclick="myFunction()" class="dropbtn" style="color: black;">Topics</button>
+          <div id="myDropdown" class="dropdown-content">
+            <a href="sports.html">Sports</a>
+            <a href="tech.html">Tech</a>
+            <a href="politics.html">Politics</a>
+            <a href="finance.html">Finance</a>
+          </div>
+        </div>
+            
+        <a href="vidchat.html" class="dropbtn" style="font-family: Archivo Narrow;">Video Chat</a>
+                        
+        <a href="games.html" class="dropbtn" style="font-family: Archivo Narrow;">Games</a>
+            
+        <a href="suggestions.html" class="dropbtn" style="font-family: Archivo Narrow;">Suggestions</a>
+            
+        <a href="aboutus.html" class="dropbtn" style="font-family: Archivo Narrow;">About Us</a>
+            
+        <a href="faq.html" class="dropbtn" style="font-family: Archivo Narrow;">FAQ</a>
+            
+        <div class="dropdown" style="font-family: helvetica; float: right;">
+          <button onclick="myFunction()" class="dropbtn"><img id="myphoto" src="logo2.png" style="width: 15; height: 20px;"></button>
+            <div id="myDropdown" class="dropdown-content" style="position: absolute; left: 1140px; width: 300px; text-align: center;">
+            <h1 style="color: #000;" id="namediv">User</h1>
+            <a style="color: #B0C4DE; text-align: center;" id="myemail">guest1@gmail.com</a>
+            <a id="mylevel" style="text-align: center;">Level: Puddle</a>
+            <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log In</button></p>
+            <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log Out</button></p>
+              </div>
+        </div>
+            
+        </div>
+        
+        <!--<button onclick="logout()">Log Oooout</button>-->
+        <center>
+        <p style="font-family: helvetica; font-size: 100px; margin-top: 20px; font-weight: bold;">Flappy Bird</p> 
+        </center><br><br><br>
+            
+        <button type="button" name="dark_light" onclick="toggleDarkLight()" title="Toggle dark/light mode" style="position: absolute; top: 225; left: 650px; font-family: Archivo Narrow; font-size: 30px;">(Dark Mode?)</button>
+        
+        <div id="Game">
+            <!-- Our canvas object where everything will be draw -->
+            <canvas id="CTX">Your browser doesn't support canvas!</canvas>
+            <center>
+            <div id="Settings" style="background-color: white; color: black;"><br>
+                 Pipe DistanceY: 
+                <input id="distY" type="number" value="130"/>
+                <br />
+                 Pipe DistanceX: 
+                <input id="distX" type="number" value="150"/>
+                <br />
+                 Jump Force:
+                <input id="jumpForce" type="number" value="17" />
+                <br />
+                 Gravity:
+                <input id="gravity" type="number" value="2" />
+                <br/><br/>
+                <button id="Button1" onclick="applySettings();" style="align-content: center; font-family: Archivo Narrow; background: #ADD8E6; color: white;  width: 100px; height: 40px; font-size: 15px; cursor: pointer;">Apply</button>
+                <button id="resetScore" onclick="resetScore();" style="align-content: center; font-family: Archivo Narrow; background: #ADD8E6; color: white;  width: 100px; height: 40px; font-size: 15px; cursor: pointer;">Reset Score</button>
+            </div>
+            </center>
+        </div>
+        
+        
+        <center>
+        <button onclick="like()" style="margin-left: 100; position: absolute; left: 470px; top: 1095px; width: 100px; height: 76px; background: url(like.png); font-family: Helvetica; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit"></button>
+        
+        <button onclick="dislike()" style="margin-left: 100; position: absolute; left: 670px; top: 1095px; width: 100px; height: 76px; background: url(dislike.png); font-family: Helvetica; font-family: Helvetica; font-size: 15px; cursor: pointer;" type="submit"></button>
+        
+        <br><br><br><br><br><br><br><br><br>
+        <div class="textbox">
+        <form style="color: white">
+            Send a Message!<br><br>
+            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4" style="font-family: Helvetica; font-size: 15px; font-weight: 100;"></textarea>
+        </form>
+        </div>
+        
+        <p align="center">
+        <button type="button" onclick="tweet()" style="align-content: center; font-family: Helvetica; background: #0000CD; color: white;  width: 75px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Send</button>
+        </p>
+        
+
+        <br><input class="textb" id="inputFileToLoad" type="file" onchange="encodeImageFileAsURL();" style="position: absolute; left: 680px;"/>
+        <div id="imgTest" style="display:none;"></div>
+        </center>
+
+    
+    <div id="mytweets"></div>
+    <div id="mydata"></div>
+    <div id="myphoto"></div>
+     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+        
+        //Loader code
+        var myVar;
+        var nbDrop = 800;
+   
+           function randRange(maxNum, minNum) {
+            return (Math.floor(Math.random(10) * (maxNum - minNum + 1)) + minNum);
+           }
+
+           function createRain() {
+            for (i = 0; i < nbDrop; i++) {
+
+             var dropLeft = randRange(0, 3000);
+             var dropTop = randRange(-1000, 1000);
+             $('.rain').append('<div class="drop" id="drop'+ i +'"></div>');
+             $('#drop' + i).css('left', dropLeft);
+             $('#drop' + i).css('top', dropTop); 
+            }
+           }
+
+        function stuff() {
+          myVar = setTimeout(showPage, 3000);
+        }
+        
+        function myFunction() {
+            createRain();
+            stuff();
+        }
+
+        function showPage() {
+          document.getElementById("rain").style.display = "none";
+          document.getElementById("loadertitle").style.display = "none";
+          document.getElementById("myDiv").style.display = "block";
+        }
+        
+        function toggleDarkLight() {
+          var body = document.getElementById("body");
+          var currentClass = body.className;
+          body.className = currentClass == "dark-mode" ? "light-mode" : "dark-mode";
+        }
+        
+        
+            // Events Listeners
+            window.addEventListener("load", Init);
+            
+            // Sprites
+            var ground = null;
+            var pipe = null;
+            var bird = null;
+
+            // Sounds
+            var sfx_wing = null;
+            var sfx_point = null;
+            var sfx_hit = null;
+            var sfx_die = null;
+            var sfx_swooshing = null;
+
+            // Deafault Viewport Size
+            var W = 400;
+            var H = 600;
+
+            // Vars
+            var status = 0; // 0 = Start Screen / 1 = Gaming / 2 = Game Over
+            var score = 0;
+            var groundStep = 0;
+            var scroolingSpeed = 3;
+            var lockScroll = false;
+            var lockJump = false;
+            var lockBird = true;
+
+            // Score Room
+            var newBest = false;
+            var bestScore = 0;
+
+            // Bird
+            var xPos = 10; // This is a constant value!
+            var yPos = 250;
+            var yGravity = 0;
+            var yGravityIncreaser = 2;
+            var yJumpGravity = -17;
+            var yMaxGravity = 20;
+            var birdDrawScale = 6; // size/scale
+            var hitTheGround = false;
+
+            function Pipe() {
+                this.X = 0;
+                this.H = 10;
+                this.Marker = false;
+            }
+
+            var Pipes = [];
+            var nPipes = 3;
+            var PipesDistanceX = 150; // X Dist
+            var PipesDistanceY = 130;
+            var PipeScale = 2;
+            // var PipeSpeed = 2;  // The pipe speed need to be equal the scrooling speed
+
+            function InitPipes() {
+                var xCounter = W;
+                for (var i = 0; i < nPipes; i++) {
+                    var sPipe = new Pipe();
+                    sPipe.X = xCounter;
+                    sPipe.H = Math.floor((Math.random() * (H - (ground.height + PipesDistanceY + 50))) + 50);
+                    sPipe.Marker = false;
+                    xCounter += PipesDistanceX + (pipe.width / PipeScale);
+                    Pipes.push(sPipe);
+                }
+            }
+
+            function Init() {
+                // Get the canvas element
+                var canvas = document.getElementById("CTX");
+
+                // Set the canvas size
+                canvas.setAttribute("width", W);
+                canvas.setAttribute("height", H);
+
+                // Get canvas context
+                var ctx = canvas.getContext("2d");
+
+                // Load Media
+                ground = new Image();
+                ground.src = "ground.png";
+                pipe = new Image();
+                pipe.src = "pipe.png";
+                bird = new Image();
+                bird.src = "bird.png";
+
+                sfx_wing = new Audio("sfx_wing.ogg");
+                sfx_point = new Audio("sfx_point.ogg");
+                sfx_hit = new Audio("sfx_hit.ogg");
+                sfx_die = new Audio("sfx_die.ogg");
+                sfx_swooshing = new Audio("sfx_swooshing.ogg");
+
+                // Init pipes
+                // Used here for test :D
+                // InitPipes();
+
+                // Key events
+                document.addEventListener("keydown", function (e) {
+                    if (e.keyCode == 70) // Space Button
+                    {
+                        if (!lockJump) {
+                            yGravity = yJumpGravity;
+                        }
+                        if (status == 0) // Start Room
+                        {
+                            startGame();
+                        }
+                        if (status == 2) // Game Over State
+                        {
+                            if (sfx_swooshing != null) {
+                                sfx_swooshing.play();
+                            }
+                            //
+                            reset();
+                        }
+                        if (sfx_wing != null && status == 1) {
+                            sfx_wing.pause();
+                            sfx_wing.currentTime = 0;
+                            //
+                            sfx_wing.play();
+                        }
+                    }
+                }, false);
+
+                // Create a loop. 30 ms interval
+                var interval = window.setInterval(function () {
+                    GUpdate(ctx, canvas);
+                }, 30);
+
+            }
+            
+            // Move the ground
+            function doGroundStep() {
+                if (ground != null) {
+                    groundStep += scroolingSpeed;
+                    if (groundStep >= ground.width) {
+                        groundStep = 0;
+                    }
+                }
+            }
+
+            function updateGravity() {
+                yGravity += yGravityIncreaser;
+                if (yGravity > yMaxGravity) {
+                    yGravity = yMaxGravity;
+                }
+            }
+
+            function updateBirdPosition() {
+                yPos += yGravity;
+                if (yPos < 0) {
+                    yPos = 0;
+                }
+                if (yPos > (H - ground.height) - (bird.height / birdDrawScale)) {
+                    yPos = (H - ground.height) - (bird.height / birdDrawScale);
+
+                    // Another Colision Case
+                    gameOver();
+
+                    if (!hitTheGround) {
+                        sfx_die.play();
+                        //
+                        hitTheGround = true;
+                    }
+                }
+            }
+
+            // Get the farest pipes X position
+            function getFarestPipeX() {
+                var farestX = 0;
+                for (var i in Pipes) {
+                    if (Pipes[i].X > farestX) {
+                        farestX = Pipes[i].X;
+                    }
+                }
+                //
+                return farestX;
+            }
+
+            function updatePipesPosition() {
+                for (var i in Pipes) {
+                    Pipes[i].X -= scroolingSpeed;
+                    if (Pipes[i].X + (pipe.width / PipeScale) < 0) {
+                        Pipes[i].X = getFarestPipeX() + (pipe.width / PipeScale) + PipesDistanceX; // The most far pipe!
+                        Pipes[i].H = Math.floor((Math.random() * (H - (ground.height + PipesDistanceY + 50))) + 50); // Get the new Height
+                        Pipes[i].Marker = false;
+                    }
+                }
+            }
+
+            function getGravityPercentValue() {
+                var yMax = yMaxGravity + (yJumpGravity * (-1));
+                var yGravityTmp = yGravity + (yJumpGravity * (-1));
+                //
+                return (yGravityTmp * 100) / yMax;
+            }
+            
+            // get the distance between two points
+            function Magnitude(p1, p2) {
+                return Math.sqrt(Math.pow(p2.X - p1.X, 2) + Math.pow(p2.Y - p1.Y, 2));
+            }
+
+            // Test collision between a circle and a rectangle
+            // circle { R: Radius, X: X, Y: Y }
+            // rect { X: X, Y: Y, W: Width, H: Height }
+            function CircleRectangleCollision(circle, rect) {
+                // Test if the circle is at the corners
+                // Corner Up-Left
+                if (circle.X + circle.R < rect.X && circle.Y + circle.R < rect.Y) {
+                    if (Magnitude({ X: circle.X, Y: circle.Y }, { X: rect.X, Y: rect.Y }) <= circle.R) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                // Corner Up-Right
+                if (circle.X > rect.X + rect.W && circle.Y < rect.Y) {
+                    if (Magnitude({ X: circle.X, Y: circle.Y }, { X: rect.X + rect.W, Y: rect.Y }) <= circle.R) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                // Corner Down-Right
+                if (circle.X > rect.X + rect.W && circle.Y > rect.Y + rect.H) {
+                    if (Magnitude({ X: circle.X, Y: circle.Y }, { X: rect.X + rect.W, Y: rect.Y + rect.H }) <= circle.R) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                // Corner Down-Left
+                if (circle.X < rect.X && circle.Y > rect.Y + rect.H) {
+                    if (Magnitude({ X: circle.X, Y: circle.Y }, { X: rect.X, Y: rect.Y + rect.H }) <= circle.R) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+
+                // the test a common rectangle collision
+                if (circle.X + circle.R > rect.X && circle.Y + circle.R > rect.Y &&
+                    circle.X - circle.R < rect.X + rect.W && circle.Y - circle.R < rect.Y + rect.H) {
+                    return true;
+                }
+                //
+                return false;
+            }
+
+            function setCookie(cname, cvalue) {
+                document.cookie = cname + "=" + cvalue + ";";
+            }
+
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for (var c = 0; c < ca.length; c++) {
+                    var d = ca[c];
+                    while (d.charAt(0) == ' ') {
+                        d = d.substring(1);
+                    }
+                    if (d.indexOf(name) == 0) {
+                        return d.substring(name.length, d.length);
+                    }
+                }
+                return "";
+            }
+            
+            function reset() {
+                status = 0;
+                score = 0;
+                yPos = 250;
+                lockScroll = false;
+                lockJump = false;
+                lockBird = true;
+                Pipes = [];
+                hitTheGround = false;
+            }
+
+            function startGame() {
+                status = 1;
+                InitPipes();
+                lockBird = false;
+            }
+
+            function gameOver() {
+                if (status == 2) {
+                    return 0;
+                }
+
+                // hit sound
+                if (sfx_hit != null) {
+                    sfx_hit.play();
+                }
+
+                status = 2; // Game Over
+                lockScroll = true;
+                lockJump = true;
+
+                // Verify the best score
+                var bestScoreCookie = getCookie("best");
+                newBest = false;
+                if (bestScoreCookie == "") {
+                    // new best score
+                    bestScore = 0;
+                    setCookie("best", score);
+                    newBest = true;
+                }
+                else {
+                    var lastBest = parseInt(bestScoreCookie);
+                    bestScore = lastBest;
+                    if (score > lastBest) {
+                        // new best score
+                        setCookie("best", score);
+                        newBest = true;
+                    }
+                }
+
+            }
+
+            function resetScore() {
+                setCookie("best", "0");
+            }
+
+            function testCollision() {
+                // For the bird will be used the circle a collider
+                // The center of the bird may be rotated
+                var birdCircle = {
+                    X: xPos + ((bird.width / birdDrawScale) / 2),
+                    Y: yPos + ((bird.height / birdDrawScale) / 2),
+                    R: (bird.height / birdDrawScale) / 2
+                };
+
+                for (var i in Pipes) {
+                    var cPipe = Pipes[i];
+                    //
+                    // cPipe.X, -(pipe.height / PipeScale) + cPipe.H
+                    var rectPipeUp = {
+                        X: cPipe.X,
+                        Y: -(pipe.height / PipeScale) + cPipe.H,
+                        W: (pipe.width / PipeScale),
+                        H: (pipe.height / PipeScale)
+                    };
+                    // cPipe.X, cPipe.H + PipesDistanceY
+                    var rectPipeDown = {
+                        X: cPipe.X,
+                        Y: cPipe.H + PipesDistanceY,
+                        W: (pipe.width / PipeScale),
+                        H: (pipe.height / PipeScale)
+                    };
+
+                    // Test each rectangle
+                    var resRectPipeUp = CircleRectangleCollision(birdCircle, rectPipeUp);
+                    var resRectPipeDown = CircleRectangleCollision(birdCircle, rectPipeDown);
+
+                    if (resRectPipeUp || resRectPipeDown) {
+                        gameOver();
+                        // Test Purpose
+                        //console.log(" Colision!");
+                    }
+                    else {
+                        // Test Purpose
+                        //console.log(" No Colision!");
+                    }
+                }
+                
+
+            }
+
+            function updateScore() {
+                var xBirdCenter = xPos + ((bird.width / birdDrawScale) / 2);
+                for (var p in Pipes) {
+                    var cPipe = Pipes[p];
+                    if (cPipe.X < xBirdCenter) {
+                        if (cPipe.Marker == false) {
+                            Pipes[p].Marker = true;
+                            score++;
+                            // Play the sfx
+                            if (sfx_point != null) {
+                                sfx_point.play();
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            function GUpdate(ctx, canvas) {
+                // Clear the screen
+                ctx.fillStyle = "rgb(100, 149, 237)";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                updateGravity();
+                updateBirdPosition();
+                if (!lockScroll) {
+                    doGroundStep();
+                    updatePipesPosition();
+                }
+                testCollision();
+                updateScore();
+
+                if (lockBird) {
+                    yGravity = 0;
+                    yPos = 250;
+                }
+
+                // Used for test purpose
+                //console.log(getGravityPercentValue());
+
+                // Draw the Pipes
+                for (var i in Pipes) {
+                    var cPipe = Pipes[i];
+
+                    // New pipe ize
+                    var nW = pipe.width / PipeScale;
+                    var nH = pipe.height / PipeScale;
+
+                    // Each pipe object represents two pipes '-'
+                    // The first one need to be rotated
+                    ctx.save();
+                    ctx.translate(cPipe.X, -(pipe.height / PipeScale) + cPipe.H);
+                    var translW = nW / 2;
+                    var translH = nH / 2;
+                    ctx.translate(translW, translH);
+                    ctx.rotate(180 * Math.PI / 180);
+                    ctx.drawImage(pipe, -translW, -translH, nW, nH);
+
+                    ctx.restore();
+
+                    // The second pipe is in their normal rotation
+                    ctx.drawImage(pipe, cPipe.X, cPipe.H + PipesDistanceY, nW, nH);
+                }
+
+                // Draw the bird
+                if (bird != null) {
+                    // Get a new image size based on a new scale
+                    var nW = bird.width / birdDrawScale;
+                    var nH = bird.height / birdDrawScale;
+
+                    // Save current context
+                    ctx.save();
+
+                    // Rotate the image
+                    // The rotation depends of the current gravity
+                    var rotationDegree = ((getGravityPercentValue() * 160) / 100) - 70;
+                    var traslW = (bird.width / birdDrawScale) / 2;
+                    var tranlH = (bird.height / birdDrawScale) / 2;
+                    ctx.translate(xPos, yPos);
+                    ctx.translate(traslW, tranlH);
+                    ctx.rotate(rotationDegree * Math.PI / 180);
+
+                    // Draw Image
+                    ctx.drawImage(bird, -traslW, -tranlH, nW, nH);
+
+                    // restore context
+                    ctx.restore();
+                }
+
+                // Draw the ground
+                // The ground is drawn upon the pipe
+                if (ground != null) {
+                    for (var i = groundStep * (-1) ; i < W + groundStep; i += ground.width) {
+                        ctx.drawImage(ground, i, H - ground.height);
+                    }
+                }
+
+                if (status == 0) {
+                    ctx.font = "bolder 40px Archivo Narrow";
+                    ctx.fillStyle = "White";
+                    ctx.fillText("Press F to Start!", 90, 200);
+                    ctx.lineWidth = 2;
+                    ctx.strokeStyle = "Black";
+                    ctx.strokeText("Press F to Start!", 90, 200);
+                }
+                if (status == 1) {
+                    // Show Score
+                    ctx.font = "bold 32px Archivo Narrow";
+                    ctx.fillStyle = "Green";
+                    var txtMetrics = ctx.measureText(score);
+
+                    ctx.fillText(score, (W / 2) - (txtMetrics.width / 2), 50);
+                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = "Black";
+                    ctx.strokeText(score, (W / 2) - (txtMetrics.width / 2), 50);
+
+                }
+                if (status == 2) {
+                    // Game Over Status
+                    // Rectangle
+                    ctx.rect(50, 150, W - 100, 200);
+                    ctx.fillStyle = "Yellow";
+                    ctx.fill();
+                    ctx.strokeStyle = "Black";
+                    ctx.stroke();
+
+                    // Game Over Message
+                    ctx.font = "bold 32px Archivo Narrow";
+                    ctx.fillStyle = "Black";
+                    ctx.fillText("Game Over!", 130, 190);
+
+                    // Score
+                    ctx.font = "24px Archivo Narrow";
+                    ctx.fillStyle = "Black";
+                    ctx.fillText("Score: " + score, 160, 230);
+
+                    // Best Score
+                    ctx.font = "24px Archivo Narrow";
+                    ctx.fillStyle = "Black";
+                    ctx.fillText("Best Score: " + bestScore, 140, 260);
+
+                    // New Best Score
+                    if (newBest) {
+                        // Best Score
+                        ctx.font = "bold 24px Archivo Narrow";
+                        ctx.fillStyle = "White";
+                        ctx.fillText("***New Best Score!***", 100, 290);
+                    }
+
+                    // Press Jump Msg
+                    ctx.font = "24px Archivo Narrow";
+                    ctx.fillStyle = "Black";
+                    ctx.fillText("Press Jump to Restart", 103, 330);
+
+                }
+
+            }
+
+            function applySettings() {
+                PipesDistanceY = parseInt(document.getElementById("distY").value);
+                PipesDistanceX = parseInt(document.getElementById("distX").value);
+                yJumpGravity = -parseInt(document.getElementById("jumpForce").value);
+                yGravityIncreaser = parseInt(document.getElementById("gravity").value);
+            }
+    
+      // Initialize Firebase
+    var loadDate = "";  
+        
+    var config = {
+        apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
+        authDomain: "droplet-34330.firebaseapp.com",
+        databaseURL: "https://droplet-34330.firebaseio.com",
+        projectId: "droplet-34330",
+        storageBucket: "droplet-34330.appspot.com",
+        messagingSenderId: "822727269402"
+      };
+  firebase.initializeApp(config);
+                
+        // Check to see if you are logged in
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user == null) {
+                alert("Not logged in.");
+                return;
+            } else {
+                userId = user.uid;
+                name = user.displayName;
+                imageUrl = user.photoURL;
+                email = user.email;
+                
+                loadDate = new Date().toString();
+                    
+                // write user data to users
+                //writeUserData(userId, name, email, imageUrl);
+                // moved to tweet function
+                
+                // write data to document
+                mydiv = document.getElementById("mydata");
+                document.getElementById("namediv").innerHTML = name;
+                
+                myemaildiv = document.getElementById("myemail");
+                document.getElementById("myemail").innerHTML = email;
+                
+                myphotodiv = document.getElementById("myphoto");
+                myphotodiv.innerHTML = "<img src='" + imageUrl + "' style='position:absolute; left: 1300px; top: 72px; width: 75px; height: 75px;'/>";
+
+                firebase.database().ref('/flappytweets').once('value').then(function(snapshot) {
+                    var data = (snapshot.val());
+                    if (data == null) {
+                      console.log("No data found at /flappytweets/" + userId);  
+                    } else {
+                        
+                      firebase.database().ref('/users').once('value').then(function(snapshot) { 
+                        var userdata = (snapshot.val());
+                        if (userdata != null) {
+                           dataarray = [data,userdata]
+                           console.log(dataarray)
+                           updatetweets(dataarray); 
+                        }
+                      });
+                      //console.log(data)
+                      //updatetweets(data);
+                    }
+                });
+            } // end user null check
+        }); // end check auth state
+        
+        function encodeImageFileAsURL() {
+
+            var filesSelected = document.getElementById("inputFileToLoad").files;
+            if (filesSelected.length > 0) {
+                var fileToLoad = filesSelected[0];
+                var fileReader = new FileReader();
+                fileReader.onload = function(fileLoadedEvent) {
+                    var srcData = fileLoadedEvent.target.result; // <--- data: base64
+                    //var newImage = document.createElement('img');
+                    //newImage.src = srcData;
+                    //document.getElementById("imgTest").innerHTML = newImage.outerHTML;
+                    document.getElementById("imgTest").innerHTML = srcData;
+                    //console.log("Converted Base64 version is: " + document.getElementById("imgTest").innerHTML);
+                    console.log(srcData);
+                }
+                fileReader.readAsDataURL(fileToLoad);
+            }
+        } // end function
+        
+        // write user data
+        function writeUserData(userId, name, email, imageUrl) {
+            firebase.database().ref('users/' + userId).once('value',    function(snapshot) {
+                 if (!snapshot.exists()) {
+                    firebase.database().ref('users/' + userId).set({
+                        username: name,
+                        email: email,
+                        profile_picture : imageUrl
+                    }); 
+                 }                                      
+            });
+        }
+        
+        function updatetweets(data) {
+            //var mylist = "<ul>";
+            var mytab = "<br><br><br><center><table style='background-color: #FEEFFF; width: 875px;'></center>";
+            users = data[1]; // put on top, because changed data - not good coding change later
+            data = data[0];
+            
+            for (var u in data) {
+                for (var t in data[u]) {
+                    mytab = mytab + "<tr>";
+                    //var date = timeSince(new Date(Date.now()));
+                    var date = new Date(data[u][t].time);
+                    var time = date.toString();
+                    if (time.substring(0,15) == loadDate.substring(0,15)) {
+                        if (time.substring(16,18) == loadDate.substring(16,18)) {
+                            var num1 = Number(loadDate.substring(19,21));
+                            var num2 = Number(time.substring(19,21));
+                            console.log(time);
+                            var num3 = num1 - num2;
+                            time = num3.toString() + " minutes ago";
+                        } else {
+                            var num1 = Number(loadDate.substring(16,18));
+                            var num2 = Number(time.substring(16,18));
+                            var num3 = num1 - num2;
+                            if (num3 == 1) {
+                                var num1 = Number(loadDate.substring(19,21));
+                                var num2 = Number(time.substring(19,21));
+                                console.log(num1);
+                                var num3 = num1 - num2 + 60;
+                                if (num3 > 59) {
+                                    time = "1 hour ago"
+                                } 
+                                else {
+                                    time = num3.toString() + " minutes ago";
+                                }
+                            } else {
+                                time = num3.toString() + " hours ago";
+                            }
+                        }
+                    } else {
+                        time = time.substring(4,15);
+                    }
+                    //If there is an image posted
+                    if (data[u][t].img != "") {
+                        
+                        mytab = mytab + "<tr>";
+                        mytab = mytab + "<td rowspan = 3>" + "<img src='" + users[u].profile_picture + "' width='100px'></td>";
+                        mytab = mytab + "<td style='font-family: Archivo Narrow; font-weight: bold; font-size: 25px;'>" + users[u].username + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<td style='color: #87CEFA;'>" + users[u].email + "</td>";
+                        mytab = mytab + "<td style = 'font-family: Archivo Narrow; font-weight: 200; font-size: 20px; text-align: center;'>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<td style='color:#B0C4DE'>" + time + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<tr>";
+                        mytab = mytab + "<td colspan = 3 style = 'text-align:center'>" + "<br><img src='" + data[u][t].img + "' width='300px'></td>";
+                        
+                        mytab = mytab + "<td style='height:25px;'></td>";
+
+                    } else {
+                        
+                        mytab = mytab + "<tr>";
+                        mytab = mytab + "<td rowspan = 3>" + "<img src='" + users[u].profile_picture + "' width='100px'></td>";
+                        mytab = mytab + "<td style='font-family: Archivo Narrow; font-weight: bold; font-size: 25px;'>" + users[u].username + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<td style='color: #87CEFA;'>" + users[u].email + "</td>";
+                        mytab = mytab + "<td style = 'font-family: Archivo Narrow; font-weight: 200; font-size: 20px; text-align: center;'>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<td style='color:#B0C4DE'>" + time + "</td>";
+                        mytab = mytab + "</tr>";
+                        
+                        mytab = mytab + "<td style='height:25px;'></td>";
+                        
+                    } 
+                    mytab = mytab + "</tr>";
+                }   
+            }
+            //mylist = mylist + "</ul>";
+            mytab = mytab + "</table>"
+            var mytdiv = document.getElementById("mytweets");
+            //mytdiv.innerHTML = mylist;
+            mytdiv.innerHTML = mytab;
+        }
+        
+        
+        // write tweets to firebase
+        function tweet() {
+            
+            loadDate = new Date().toString();
+            var twitdoc = document.getElementById("twit");
+            var twitimg = document.getElementById("imgTest");
+            var nameValue = twitdoc.value;
+            var imgValue = twitimg.innerHTML;
+            var js_time = Date.now();
+            var tweetid = firebase.database().ref('flappytweets/' + userId + "/").push({tweet: nameValue, time: js_time, img: imgValue});
+            twitdoc.value = "";
+            writeUserData(userId, name, email, imageUrl);
+            console.log("tweet written")
+            
+            firebase.database().ref('/flappytweets').once('value').then(function(snapshot) {
+                    var data = (snapshot.val());
+                    if (data == null) {
+                      console.log("No data found at /flappytweets/" + userId);  
+                    } else { 
+                        firebase.database().ref('/users').once('value').then(function(snapshot) { 
+                        var userdata = (snapshot.val());
+                        if (userdata != null) {
+                           dataarray = [data,userdata]
+                           console.log(dataarray)
+                           updatetweets(dataarray); 
+                        }
+                      });
+                    }
+                });
+            
+            
+            
+            // The unique key stored in tweetid is based on a timestamp, so list items will automatically be ordered chronologically. Because Firebase generates a unique key for each tweet, no write conflicts will occur if multiple users add a post at the same time. https://firebase.google.com/docs/database/admin/save-data
+            
+        }
+        
+        function login() {
+            console.log("Logging in");
+            var provider = new firebase.auth.GoogleAuthProvider();
+            firebase.auth().signInWithRedirect(provider).then(function(result) { 
+                window.location.replace("home.html");
+            });
+        }
+        
+        function logout() {
+            console.log("Logging out");
+            firebase.auth().signOut().then(function() {
+            });
+        }
+        
+        function changename() {
+            console.log("Changing username");
+            //name = username;
+        }
+    
+    </script>
+    </div>
+
+        
+    </body>
+ 
+</html>

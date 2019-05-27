@@ -192,27 +192,104 @@
             .show {display:block;}
 
             
-            /*.textb {
-                background-color: #0000CD;
-            }*/
+            .drop {
+                background: #87CEEB;
+                width: 1px;
+                height: 89px;
+                position: absolute;
+                bottom: 200px;
+                -webkit-animation: fall .63s linear infinite;
+                -moz-animation: fall .63s linear infinite;
+               }
+            
+            #loadertitle {
+                color: #87CEEB;
+                font-family: Archivo Narrow;
+                font-size: 200px;
+                text-align: center;
+                margin-top: 250px;
+            }
+
+               @-webkit-keyframes fall { to {margin-top: 900px;}}
+               @-moz-keyframes fall { to {margin-top: 900px;}}
+
+            #myDiv {
+              display: none;
+              text-align: center;
+            }
+            
+            /* Add animation to "page content" */
+            .animate-bottom {
+              position: relative;
+              -webkit-animation-name: animatebottom;
+              -webkit-animation-duration: 1s;
+              animation-name: animatebottom;
+              animation-duration: 1s
+            }
+
+            @-webkit-keyframes animatebottom {
+              from { bottom:-100px; opacity:0 } 
+              to { bottom:0px; opacity:1 }
+            }
+
+            @keyframes animatebottom { 
+              from{ bottom:-100px; opacity:0 } 
+              to{ bottom:0; opacity:1 }
+            }
             
         </style>
     </head>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
     <script src="https://www.gstatic.com/firebasejs/5.9.4/firebase.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script>
+        
+        //Loader code
+        var myVar;
+        var nbDrop = 800;
+   
+           function randRange(maxNum, minNum) {
+            return (Math.floor(Math.random(10) * (maxNum - minNum + 1)) + minNum);
+           }
+
+           function createRain() {
+            for (i = 0; i < nbDrop; i++) {
+
+             var dropLeft = randRange(0, 3000);
+             var dropTop = randRange(-1000, 1000);
+             $('.rain').append('<div class="drop" id="drop'+ i +'"></div>');
+             $('#drop' + i).css('left', dropLeft);
+             $('#drop' + i).css('top', dropTop); 
+            }
+           }
+
+        function stuff() {
+          myVar = setTimeout(showPage, 3000);
+        }
+        
+        function myFunction() {
+            createRain();
+            stuff();
+        }
+
+        function showPage() {
+          document.getElementById("rain").style.display = "none";
+          document.getElementById("loadertitle").style.display = "none";
+          document.getElementById("myDiv").style.display = "block";
+        }
+        
       // Initialize Firebase
     var loadDate = "";  
         
     var config = {
-    apiKey: "AIzaSyA0remXOuJymKXkL1xFdI4AnPeHSiMlYQk",
-    authDomain: "nanotech-b90b6.firebaseapp.com",
-    databaseURL: "https://nanotech-b90b6.firebaseio.com",
-    projectId: "nanotech-b90b6",
-    storageBucket: "nanotech-b90b6.appspot.com",
-    messagingSenderId: "1013230574265"
-  };
+        apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
+        authDomain: "droplet-34330.firebaseapp.com",
+        databaseURL: "https://droplet-34330.firebaseio.com",
+        projectId: "droplet-34330",
+        storageBucket: "droplet-34330.appspot.com",
+        messagingSenderId: "822727269402"
+      };
   firebase.initializeApp(config);
                 
         // Check to see if you are logged in
@@ -318,36 +395,12 @@
     
     </script>
 
-    <body style="background-color: aliceblue">
+    <body style="background-color: aliceblue" onload="myFunction()">
         
-        <!--Loading spinner-->
-        <div class="center"></div>
-
-        <div class="inner-spin">
-
-          <div class="inner-arc inner-arc_start-a"></div>
-          <div class="inner-arc inner-arc_end-a"></div>
-
-          <div class="inner-arc inner-arc_start-b"></div>
-          <div class="inner-arc inner-arc_end-b"></div>
-
-          <div class="inner-moon-a"></div>
-         <div class="inner-moon-b"></div>
-
-        </div>
-
-        <div class="outer-spin">
-
-          <div class="outer-arc outer-arc_start-a"></div>
-          <div class="outer-arc outer-arc_end-a"></div>
-
-          <div class="outer-arc outer-arc_start-b"></div>
-          <div class="outer-arc outer-arc_end-b"></div>
-
-          <div class="outer-moon-a"></div>
-         <div class="outer-moon-b"></div>
-
-        </div>
+        <div id="rain" class="rain"></div>
+        <div id="loadertitle">Droplet</div>
+        
+        <div style="display:none;" id="myDiv" class="animate-bottom">
         
         <div class="topnav">
           <!--<a class="active" href="#menu"><img src="logo.png" style="width: 15; height: 20px;"></a>-->
@@ -364,17 +417,8 @@
         </div>
             
         <a href="vidchat.html" class="dropbtn" style="font-family: Archivo Narrow;">Video Chat</a>
-            
-        <a href="connections.html" class="dropbtn" style="font-family: Archivo Narrow;">Connections</a>
-            
-        <div class="dropdown" style="font-family: helvetica; ">
-          <button onclick="myFunction()" class="dropbtn">Games</button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="soccer.html">???</a>
-            <a href="basketball.html">???</a>
-            <a href="hockey.html">???</a>
-          </div>
-        </div>
+                        
+        <a href="games.html" class="dropbtn" style="font-family: Archivo Narrow;">Games</a>
             
         <a href="suggestions.html" class="dropbtn" style="font-family: Archivo Narrow;">Suggestions</a>
             
@@ -388,7 +432,6 @@
             <h1 style="color: #000;" id="namediv">User</h1>
             <a style="color: #B0C4DE; text-align: center;" id="myemail">guest1@gmail.com</a>
             <a id="mylevel" style="text-align: center;">Level: Puddle</a>
-            <a id="mydroplets" style="text-align: center;">Connections: 1</a>
             <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log In</button></p>
             <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log Out</button></p>
               </div>
@@ -408,21 +451,7 @@
     <div id="mydata"></div>
     <div id="myphoto"></div>
         
-    </body>
-    
-    <body>
-    
-    <!--<style>
-        #row:hover {
-            background-color: lightblue;
-            color: white;
-        }
-        
-        #row {
-            background-color: white;
-            color: red;
-        }
-    </style>-->
+    </div>
         
     </body>
  

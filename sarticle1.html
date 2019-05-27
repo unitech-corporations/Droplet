@@ -280,6 +280,7 @@
     // Initialize Firebase
     var loadDate = "";
     var droplets = 0;
+    var title = "soccer";
         
     var config = {
         apiKey: "AIzaSyBVOwlTeu_-jnXZp253XbfQEFi7a60rVKE",
@@ -321,10 +322,10 @@
                 mydropdiv = document.getElementById("mydroplets");
                 document.getElementById("mydroplets").innerHTML = "Droplets: " + droplets;
 
-                firebase.database().ref('/tweets').once('value').then(function(snapshot) {
+                firebase.database().ref('/soccertweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
-                      console.log("No data found at /tweets/" + userId);  
+                      console.log("No data found at /soccertweets/" + userId);  
                     } else {
                         
                       firebase.database().ref('/users').once('value').then(function(snapshot) { 
@@ -369,11 +370,14 @@
                         username: name,
                         email: email,
                         profile_picture : imageUrl,
+                        userId: userId
                        
                     }); 
                  }                                      
             });
         }
+        
+        //var count = 0;
         
         function updatetweets(data) {
             //var mylist = "<ul>";
@@ -381,6 +385,8 @@
             users = data[1]; // put on top, because changed data - not good coding change later
             data = data[0];
             
+            //var array = Object.keys(data[u]);
+             
             for (var u in data) {
                 for (var t in data[u]) {
                     mytab = mytab + "<tr>";
@@ -426,6 +432,7 @@
                         
                         mytab = mytab + "<td style='color: #87CEFA;'>" + users[u].email + "</td>";
                         mytab = mytab + "<td style = 'font-family: Archivo Narrow; font-weight: 200; font-size: 20px; text-align: center;'>" + data[u][t].tweet + "</td>";
+                        mytab = mytab + "<td><button><img src='like2.png' style='width: 35; height: 35;'></button></td>";
                         mytab = mytab + "</tr>";
                         
                         mytab = mytab + "<td style='color:#B0C4DE'>" + time + "</td>";
@@ -445,9 +452,12 @@
                         
                         mytab = mytab + "<td style='color: #87CEFA;'>" + users[u].email + "</td>";
                         mytab = mytab + "<td style = 'font-family: Archivo Narrow; font-weight: 200; font-size: 20px; text-align: center;'>" + data[u][t].tweet + "</td>";
+                        /*mytab = mytab + "<td><button id= likes " + count + " onclick='commentLike(`" + count + "`,`" + array + "`,`" + users[u].userId + "`)'><img src='like2.png' style='width: 35; height: 35;'></button></td>";*/
                         mytab = mytab + "</tr>";
                         
                         mytab = mytab + "<td style='color:#B0C4DE'>" + time + "</td>";
+                        mytab = mytab + "<td></td>";
+                        //mytab = mytab + "<td style='color:#B0C4DE'>" + totallikes + "</td>";
                         mytab = mytab + "</tr>";
                         
                         mytab = mytab + "<td style='height:25px;'></td>";
@@ -461,12 +471,11 @@
             var mytdiv = document.getElementById("mytweets");
             //mytdiv.innerHTML = mylist;
             mytdiv.innerHTML = mytab;
+            //count ++;
         }
         
         // write tweets to firebase
         function tweet() {
-            
-            //4-0
             
             loadDate = new Date().toString();
             var twitdoc = document.getElementById("twit");
@@ -474,15 +483,17 @@
             var nameValue = twitdoc.value;
             var imgValue = twitimg.innerHTML;
             var js_time = Date.now();
-            var tweetid = firebase.database().ref('tweets/' + userId + "/").push({tweet: nameValue, time: js_time, img: imgValue});
+            var totallikes = 1;
+            
+            var tweetId = firebase.database().ref('soccertweets/' + userId + "/").push({tweet: nameValue, time: js_time, likes: totallikes, img: imgValue});
             twitdoc.value = "";
             writeUserData(userId, name, email, imageUrl);
-            console.log("tweet written")
+            console.log("tweet written");
             
-            firebase.database().ref('/tweets').once('value').then(function(snapshot) {
+            firebase.database().ref('/soccertweets').once('value').then(function(snapshot) {
                     var data = (snapshot.val());
                     if (data == null) {
-                      console.log("No data found at /tweets/" + userId);  
+                      console.log("No data found at /soccertweets/" + userId);  
                     } else { 
                         firebase.database().ref('/users').once('value').then(function(snapshot) { 
                         var userdata = (snapshot.val());
@@ -520,6 +531,28 @@
             console.log("Changing username");
             //name = username;
         }
+        
+        
+        //Comment likes
+        
+        function commentLike(count, tweetId, tweetOwner) {
+            firebase.database().ref('/tweets/' + tweetOwner + '/' + tweetId).once('value').then(function(snapshot) {
+                    var data = (snapshot.val());
+                    alert(data.likes);
+                    if (data.likes != null){
+                        var likeCount = parseInt(10, data.likes) + 1;
+            
+                        firebase.database().ref('tweets/' + tweetOwner + "/" + tweetid).update({likes: likeCount});
+                        alert("Like1");
+                    }
+                    else{
+                        firebase.database().ref('tweets/' + tweetOwner + "/" + tweetid).update({likes: 1});
+                        alert("Like2");
+                    }
+                });
+            
+        }
+        
         
         function like() {
             //barca lost
@@ -560,17 +593,8 @@
         </div>
             
         <a href="vidchat.html" class="dropbtn" style="font-family: Archivo Narrow;">Video Chat</a>
-            
-        <a href="connections.html" class="dropbtn" style="font-family: Archivo Narrow;">Connections</a>
-            
-        <div class="dropdown" style="font-family: helvetica; ">
-          <button onclick="myFunction()" class="dropbtn">Games</button>
-          <div id="myDropdown" class="dropdown-content">
-            <a href="soccer.html">???</a>
-            <a href="basketball.html">???</a>
-            <a href="hockey.html">???</a>
-          </div>
-        </div>
+                        
+        <a href="games.html" class="dropbtn" style="font-family: Archivo Narrow;">Games</a>
             
         <a href="suggestions.html" class="dropbtn" style="font-family: Archivo Narrow;">Suggestions</a>
             
@@ -584,7 +608,6 @@
             <h1 style="color: #000;" id="namediv">User</h1>
             <a style="color: #B0C4DE; text-align: center;" id="myemail">guest1@gmail.com</a>
             <a id="mylevel" style="text-align: center;">Level: Puddle</a>
-            <a id="mydroplets" style="text-align: center;">Connections: 1</a>
             <p><button onclick="login()" style="float: left; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log In</button></p>
             <p><button onclick="logout()" style="float: right; width: 70px; height: 40px; cursor: pointer; background: #B0C4DE; color: #fff; font-family:Archivo Narrow; font-size: 15px;">Log Out</button></p>
               </div>
@@ -625,12 +648,12 @@
         <div class="textbox">
         <form style="color: white">
             Send a Message!<br><br>
-            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4" style="font-family: Helvetica; font-size: 15px; font-weight: 100;"></textarea>
+            <textarea id="twit" type="text" name="thetweet" cols="100" rows="4" style="font-family: Archivo Narrow; font-size: 15px; font-weight: 100;"></textarea>
         </form>
         </div>
         
         <p align="center">
-        <button type="button" onclick="tweet()" style="align-content: center; font-family: Helvetica; background: #0000CD; color: white;  width: 75px; height: 40px; font-family: Helvetica; font-size: 15px; cursor: pointer;">Send</button>
+        <button type="button" onclick="tweet()" style="align-content: center; background: #0000CD; color: white;  width: 75px; height: 40px; font-family: Archivo Narrow; font-size: 15px; cursor: pointer;">Send</button>
         </p>
         
 
@@ -644,7 +667,8 @@
     <div id="mydata"></div>
     <div id="myphoto"></div>
     <div id="mydroplets"></div>
-        </div>
+    
+    </div>
         
     </body>
  
